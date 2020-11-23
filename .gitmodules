@@ -1,0 +1,12 @@
+[submodule "lib/FreeRTOS"]
+	path = lib/FreeRTOS
+	url = https://github.com/FreeRTOS/FreeRTOS-kernel
+[submodule "lib/coreMQTT"]
+	path = lib/coreMQTT
+	url = https://github.com/FreeRTOS/coreMQTT
+[submodule "lib/mbedtls"]
+	path = lib/mbedtls
+	url = https://github.com/ARMmbed/mbedtls
+[submodule "lib/cellular"]
+	path = lib/cellular
+	url = https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-HAL
