@@ -50,9 +50,9 @@
 #endif
 
 #define CELLULAR_SIM_CARD_WAIT_INTERVAL_MS    ( 500UL )
-#define CELLULAR_SIM_CARD_WAIT_TIMEOUT_MS     ( 20000UL )
-
 #define CELLULAR_MAX_SIM_RETRY                ( 5U )
+
+#define CELLULAR_PDN_CONNECT_WAIT_INTERVAL_MS ( 1000UL )
 
 /*-----------------------------------------------------------*/
 
@@ -81,7 +81,7 @@ bool setupCellular( void )
     CellularPdnConfig_t pdnConfig = { CELLULAR_PDN_CONTEXT_IPV4, CELLULAR_PDN_AUTH_NONE, CELLULAR_APN, "", "" };
     CellularPdnStatus_t PdnStatusBuffers = { 0 };
     char localIP[ CELLULAR_IP_ADDRESS_MAX_SIZE ] = { '\0' };
-    uint32_t timeoutCountLimit = ( CELLULAR_SIM_CARD_WAIT_TIMEOUT_MS / CELLULAR_SIM_CARD_WAIT_INTERVAL_MS ) + 1U;
+    uint32_t timeoutCountLimit = ( CELLULAR_PDN_CONNECT_TIMEOUT / CELLULAR_PDN_CONNECT_WAIT_INTERVAL_MS ) + 1U;
     uint32_t timeoutCount = 0;
     uint8_t NumStatus = 1;
 
@@ -161,7 +161,7 @@ bool setupCellular( void )
                 configPRINTF( ( ">>>  Cellular module can't be registered  <<<\r\n" ) );
             }
 
-            vTaskDelay( pdMS_TO_TICKS( CELLULAR_SIM_CARD_WAIT_INTERVAL_MS * 2 ) );
+            vTaskDelay( pdMS_TO_TICKS( CELLULAR_PDN_CONNECT_WAIT_INTERVAL_MS ) );
         }
     }
 

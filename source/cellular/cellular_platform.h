@@ -140,4 +140,15 @@ void PlatformMutex_Unlock( PlatformMutex_t * pMutex );
 
 /*-----------------------------------------------------------*/
 
+/**
+ * @brief Cellular library platform delay function.
+ *
+ * Cellular library use platform delay function for waiting events.
+ *
+ * The delay functions in the following link can be refernced as function prototype.
+ * https://www.freertos.org/a00127.html
+ *
+ */
+#define Platform_Delay( delayMs )           vTaskDelay( pdMS_TO_TICKS( delayMs ) )
+
 #endif /* __CELLULAR_PLATFORM_H__ */
