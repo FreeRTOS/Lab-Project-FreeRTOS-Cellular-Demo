@@ -149,6 +149,6 @@ void PlatformMutex_Unlock( PlatformMutex_t * pMutex );
  * https://www.freertos.org/a00127.html
  *
  */
-#define Platform_Delay( delayMs )           vTaskDelay( pdMS_TO_TICKS( delayMs ) )
+#define Platform_Delay( delayMs )    vTaskDelay( pdMS_TO_TICKS( delayMs ) )
 
 #endif /* __CELLULAR_PLATFORM_H__ */

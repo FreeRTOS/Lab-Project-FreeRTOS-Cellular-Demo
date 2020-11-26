@@ -57,7 +57,7 @@
     const char * mbedtls_strerror_lowlevel( int32_t errnum );
 
     #ifdef __cplusplus
-}
+        }
     #endif
 
 #endif /* ifndef MBEDTLS_ERROR_H_ */

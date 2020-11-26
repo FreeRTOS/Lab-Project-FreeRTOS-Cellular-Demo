@@ -49,10 +49,10 @@
     #error "CELLULAR_APN is not defined in cellular_config.h"
 #endif
 
-#define CELLULAR_SIM_CARD_WAIT_INTERVAL_MS    ( 500UL )
-#define CELLULAR_MAX_SIM_RETRY                ( 5U )
+#define CELLULAR_SIM_CARD_WAIT_INTERVAL_MS       ( 500UL )
+#define CELLULAR_MAX_SIM_RETRY                   ( 5U )
 
-#define CELLULAR_PDN_CONNECT_WAIT_INTERVAL_MS ( 1000UL )
+#define CELLULAR_PDN_CONNECT_WAIT_INTERVAL_MS    ( 1000UL )
 
 /*-----------------------------------------------------------*/
 

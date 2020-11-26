@@ -33,8 +33,8 @@ typedef QueueHandle_t SemaphoreHandle_t;
 
 typedef struct threadInfo
 {
-    void * pArgument;                   /**< @brief Argument to `threadRoutine`. */
-    void ( * threadRoutine )( void * ); /**< @brief Thread function to run. */
+    void * pArgument;                  /**< @brief Argument to `threadRoutine`. */
+    void ( *threadRoutine )( void * ); /**< @brief Thread function to run. */
 } threadInfo_t;
 
 /*-----------------------------------------------------------*/
@@ -97,7 +97,7 @@ static bool prIotMutexTimedLock( PlatformMutex_t * pMutex,
 
 /*-----------------------------------------------------------*/
 
-bool Platform_CreateDetachedThread( void ( * threadRoutine )( void * ),
+bool Platform_CreateDetachedThread( void ( *threadRoutine )( void * ),
                                     void * pArgument,
                                     int32_t priority,
                                     size_t stackSize )

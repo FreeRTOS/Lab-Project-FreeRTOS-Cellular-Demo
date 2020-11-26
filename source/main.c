@@ -51,13 +51,13 @@ static UBaseType_t ulNextRand;
 /*-----------------------------------------------------------*/
 
 /* Cellular HAL init and setup cellular network registration. */
-extern bool setupCellular(void);
+extern bool setupCellular( void );
 
 /* MQTT demo application. */
-extern void MQTTDemoTask(void* pvParameters);
+extern void MQTTDemoTask( void * pvParameters );
 
 /* The task function to setup cellular with thread ready environment. */
-static void CellularDemoTask(void* pvParameters);
+static void CellularDemoTask( void * pvParameters );
 
 /*-----------------------------------------------------------*/
 
@@ -67,6 +67,7 @@ static void CellularDemoTask( void * pvParameters )
 
     /* Setup cellular. */
     retCellular = setupCellular();
+
     if( retCellular == false )
     {
         configPRINTF( ( "Cellular failed to initialize.\r\n" ) );
@@ -74,7 +75,7 @@ static void CellularDemoTask( void * pvParameters )
 
     /* Stop here if we fail to initialize cellular. */
     configASSERT( retCellular == true );
-    
+
     /* Start the task. */
     MQTTDemoTask( pvParameters );
 }
@@ -90,7 +91,7 @@ int main( void )
     /* Cellular HAL init needs thread ready environment.
      * CellularDemoTask invoke setupCellular to init cellular HAL and register network.
      * Then it handover the control to the application. */
-    xTaskCreate( CellularDemoTask,          /* Function that implements the task. */
+    xTaskCreate( CellularDemoTask,         /* Function that implements the task. */
                  "CellularDemo",           /* Text name for the task - only used for debugging. */
                  democonfigDEMO_STACKSIZE, /* Size of stack (in words, not bytes) to allocate for the task. */
                  NULL,                     /* Task parameter - not used in this case. */
