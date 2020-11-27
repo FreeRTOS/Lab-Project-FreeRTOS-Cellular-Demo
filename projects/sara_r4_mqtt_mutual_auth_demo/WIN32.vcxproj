@@ -126,8 +126,8 @@
     <ClInclude Include="..\..\lib\mbedtls\library\psa_crypto_slot_management.h" />
     <ClInclude Include="..\..\lib\mbedtls\library\psa_crypto_storage.h" />
     <ClInclude Include="..\..\lib\mbedtls\library\ssl_invasive.h" />
-    <ClInclude Include="..\..\source\cellular\cellular_config.h" />
     <ClInclude Include="..\..\source\cellular\cellular_platform.h" />
+    <ClInclude Include="..\..\source\cellular\sara_r4\cellular_config.h" />
     <ClInclude Include="..\..\source\coreMQTT\core_mqtt_config.h" />
     <ClInclude Include="..\..\source\coreMQTT\sockets_wrapper.h" />
     <ClInclude Include="..\..\source\coreMQTT\using_mbedtls.h" />
@@ -306,8 +306,8 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>.\..\..\lib\cellular\include;.\..\..\lib\cellular\common\include;.\..\..\lib\cellular\common\include\private;.\..\..\lib\FreeRTOS\portable\MSVC-MingW;.\..\..\lib\FreeRTOS\include;.\..\..\lib\coreMQTT\source\portable;.\..\..\lib\coreMQTT\source\include;.\..\..\lib\coreMQTT\source\interface;.\..\..\lib\mbedtls\include;..\..\source;..\..\source\cellular;..\..\source\coreMQTT;..\..\source\FreeRTOS;..\..\source\mbedtls;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>MBEDTLS_CONFIG_FILE="mbedtls_config.h";WIN32;_DEBUG;_CONSOLE;_WIN32_WINNT=0x0500;WINVER=0x400;_CRT_SECURE_NO_WARNINGS;CELLULAR_MAX_SEND_DATA_LEN=1024;CELLULAR_MAX_RECV_DATA_LEN=1024;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\..\..\lib\cellular\include;.\..\..\lib\cellular\common\include;.\..\..\lib\cellular\common\include\private;.\..\..\lib\FreeRTOS\portable\MSVC-MingW;.\..\..\lib\FreeRTOS\include;.\..\..\lib\coreMQTT\source\portable;.\..\..\lib\coreMQTT\source\include;.\..\..\lib\coreMQTT\source\interface;.\..\..\lib\mbedtls\include;..\..\source;..\..\source\cellular\sara_r4;..\..\source\cellular;..\..\source\coreMQTT;..\..\source\FreeRTOS;..\..\source\mbedtls;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>MBEDTLS_CONFIG_FILE="mbedtls_config.h";WIN32;_DEBUG;_CONSOLE;_WIN32_WINNT=0x0500;WINVER=0x400;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>

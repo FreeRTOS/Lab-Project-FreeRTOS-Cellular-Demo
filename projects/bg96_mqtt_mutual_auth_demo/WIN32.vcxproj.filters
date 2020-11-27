@@ -1,17 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="..\..\lib\cellular\common\include">
-      <UniqueIdentifier>{20285887-a978-4285-8bcf-9424eaaf19d4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="..\..\lib\cellular\common\src">
-      <UniqueIdentifier>{1d3a8210-7a8e-4beb-9616-f2894df32bf6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="..\..\lib\cellular\common\include\private">
       <UniqueIdentifier>{53878999-cbc4-4041-aded-aa0a519bb66a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="..\..\lib\cellular\modules\bg96">
-      <UniqueIdentifier>{e06971d3-76bc-4697-9cc8-368b097e1532}</UniqueIdentifier>
     </Filter>
     <Filter Include="lib">
       <UniqueIdentifier>{525fb155-a1a7-46a1-b777-d3fcdacc7277}</UniqueIdentifier>
@@ -465,10 +456,10 @@
     <ClInclude Include="..\..\source\FreeRTOS\FreeRTOSConfig.h">
       <Filter>source\FreeRTOS</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\cellular\cellular_config.h">
+    <ClInclude Include="..\..\source\cellular\cellular_platform.h">
       <Filter>source\cellular</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\cellular\cellular_platform.h">
+    <ClInclude Include="..\..\source\cellular\bg96\cellular_config.h">
       <Filter>source\cellular</Filter>
     </ClInclude>
   </ItemGroup>

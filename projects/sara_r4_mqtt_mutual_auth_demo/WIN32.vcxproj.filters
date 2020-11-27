@@ -453,10 +453,10 @@
     <ClInclude Include="..\..\source\FreeRTOS\FreeRTOSConfig.h">
       <Filter>source\FreeRTOS</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\cellular\cellular_config.h">
+    <ClInclude Include="..\..\source\cellular\cellular_platform.h">
       <Filter>source\cellular</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\cellular\cellular_platform.h">
+    <ClInclude Include="..\..\source\cellular\sara_r4\cellular_config.h">
       <Filter>source\cellular</Filter>
     </ClInclude>
   </ItemGroup>

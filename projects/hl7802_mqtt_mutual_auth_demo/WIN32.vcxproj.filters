@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="..\..\lib\cellular\common\include\private">
-      <UniqueIdentifier>{53878999-cbc4-4041-aded-aa0a519bb66a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="lib">
       <UniqueIdentifier>{525fb155-a1a7-46a1-b777-d3fcdacc7277}</UniqueIdentifier>
     </Filter>
@@ -423,9 +420,6 @@
     <ClInclude Include="..\..\lib\cellular\modules\hl7802\cellular_hl7802.h">
       <Filter>lib\cellular\modules\hl7802</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\cellular\cellular_config.h">
-      <Filter>source\cellular</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\source\cellular\cellular_platform.h">
       <Filter>source\cellular</Filter>
     </ClInclude>
@@ -461,6 +455,9 @@
     </ClInclude>
     <ClInclude Include="..\..\source\logging_stack.h">
       <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\cellular\hl7802\cellular_config.h">
+      <Filter>source\cellular</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

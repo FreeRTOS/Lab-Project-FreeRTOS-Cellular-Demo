@@ -126,7 +126,7 @@
     <ClInclude Include="..\..\lib\mbedtls\library\psa_crypto_slot_management.h" />
     <ClInclude Include="..\..\lib\mbedtls\library\psa_crypto_storage.h" />
     <ClInclude Include="..\..\lib\mbedtls\library\ssl_invasive.h" />
-    <ClInclude Include="..\..\source\cellular\cellular_config.h" />
+    <ClInclude Include="..\..\source\cellular\bg96\cellular_config.h" />
     <ClInclude Include="..\..\source\cellular\cellular_platform.h" />
     <ClInclude Include="..\..\source\coreMQTT\core_mqtt_config.h" />
     <ClInclude Include="..\..\source\coreMQTT\sockets_wrapper.h" />
@@ -306,7 +306,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>.\..\..\lib\cellular\include;.\..\..\lib\cellular\common\include;.\..\..\lib\cellular\common\include\private;.\..\..\lib\FreeRTOS\portable\MSVC-MingW;.\..\..\lib\FreeRTOS\include;.\..\..\lib\coreMQTT\source\portable;.\..\..\lib\coreMQTT\source\include;.\..\..\lib\coreMQTT\source\interface;.\..\..\lib\mbedtls\include;.\..\..\source;.\..\..\source\coreMQTT;.\..\..\source\FreeRTOS;.\..\..\source\mbedtls;.\..\..\source\cellular;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\..\..\lib\cellular\include;.\..\..\lib\cellular\common\include;.\..\..\lib\cellular\common\include\private;.\..\..\lib\FreeRTOS\portable\MSVC-MingW;.\..\..\lib\FreeRTOS\include;.\..\..\lib\coreMQTT\source\portable;.\..\..\lib\coreMQTT\source\include;.\..\..\lib\coreMQTT\source\interface;.\..\..\lib\mbedtls\include;.\..\..\source;.\..\..\source\coreMQTT;.\..\..\source\FreeRTOS;.\..\..\source\mbedtls;.\..\..\source\cellular;.\..\..\source\cellular\bg96;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>MBEDTLS_CONFIG_FILE="mbedtls_config.h";WIN32;_DEBUG;_CONSOLE;_WIN32_WINNT=0x0500;WINVER=0x400;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
