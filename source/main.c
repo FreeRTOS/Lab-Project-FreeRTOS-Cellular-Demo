@@ -1,5 +1,4 @@
 /*
- * FreeRTOS Kernel V10.3.0
  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -36,7 +35,9 @@
 
 /* Visual studio intrinsics used so the __debugbreak() function is available
  * should an assert get hit. */
-#include <intrin.h>
+#if defined( _WIN32 )
+    #include <intrin.h>
+#endif
 
 /* FreeRTOS includes. */
 #include <FreeRTOS.h>
@@ -54,7 +55,7 @@ static UBaseType_t ulNextRand;
 extern bool setupCellular( void );
 
 /* MQTT demo application. */
-extern void MQTTDemoTask( void * pvParameters );
+extern void RunMQTTTask( void * pvParameters );
 
 /* The task function to setup cellular with thread ready environment. */
 static void CellularDemoTask( void * pvParameters );
@@ -76,8 +77,8 @@ static void CellularDemoTask( void * pvParameters )
     /* Stop here if we fail to initialize cellular. */
     configASSERT( retCellular == true );
 
-    /* Start the task. */
-    MQTTDemoTask( pvParameters );
+    /* Run the MQTT demo. */
+    RunMQTTTask( pvParameters );
 }
 
 /*-----------------------------------------------------------*/
@@ -90,12 +91,12 @@ int main( void )
 
     /* Cellular HAL init needs thread ready environment.
      * CellularDemoTask invoke setupCellular to init cellular HAL and register network.
-     * Then it handover the control to the application. */
+     * Then it runs the MQTT demo. */
     xTaskCreate( CellularDemoTask,         /* Function that implements the task. */
                  "CellularDemo",           /* Text name for the task - only used for debugging. */
                  democonfigDEMO_STACKSIZE, /* Size of stack (in words, not bytes) to allocate for the task. */
                  NULL,                     /* Task parameter - not used in this case. */
-                 tskIDLE_PRIORITY,         /* Task priority, must be between 0 and configMAX_PRIORITIES - 1. */
+                 democonfigDEMO_PRIORITY,  /* Task priority, must be between 0 and configMAX_PRIORITIES - 1. */
                  NULL );                   /* Used to pass out a handle to the created task - not used in this case. */
 
     /* Start the RTOS scheduler. */
@@ -109,7 +110,9 @@ int main( void )
      * really applicable to the Win32 simulator port). */
     for( ; ; )
     {
-        __debugbreak();
+        #if defined( _WIN32 )
+            __debugbreak();
+        #endif
     }
 }
 
@@ -133,7 +136,9 @@ void vAssertCalled( const char * pcFile,
     {
         while( ulBlockVariable == 0UL )
         {
-            __debugbreak();
+            #if defined( _WIN32 )
+                __debugbreak();
+            #endif
         }
     }
     taskENABLE_INTERRUPTS();

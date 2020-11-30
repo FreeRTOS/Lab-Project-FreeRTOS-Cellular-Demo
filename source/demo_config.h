@@ -228,6 +228,11 @@
 #define democonfigDEMO_STACKSIZE            configMINIMAL_STACK_SIZE
 
 /**
+ * @brief Set the priority of the main demo task.
+ */
+#define democonfigDEMO_PRIORITY             ( tskIDLE_PRIORITY + 1 )
+
+/**
  * @brief Size of the network buffer for MQTT packets.
  */
 #define democonfigNETWORK_BUFFER_SIZE       ( 1024U )

@@ -76,7 +76,7 @@ bool Platform_CreateDetachedThread( void ( * threadRoutine )( void * ),
                                     size_t stackSize );
 
 #define PLATFORM_THREAD_DEFAULT_STACK_SIZE    ( 2048U )
-#define PLATFORM_THREAD_DEFAULT_PRIORITY      ( 5U )
+#define PLATFORM_THREAD_DEFAULT_PRIORITY      ( tskIDLE_PRIORITY + 5U )
 
 /*-----------------------------------------------------------*/
 
@@ -85,7 +85,8 @@ bool Platform_CreateDetachedThread( void ( * threadRoutine )( void * ),
  *
  * Cellular library use platform mutex to protect resource.
  *
- * The IotMutex_ functions can be refernced as function prototype.
+ * The IotMutex_ functions can be refernced as function prototype for
+ * PlatfromMutex_ prefix function in the following link.
  * https://docs.aws.amazon.com/freertos/latest/lib-ref/c-sdk/platform/platform_threads_functions.html
  *
  */

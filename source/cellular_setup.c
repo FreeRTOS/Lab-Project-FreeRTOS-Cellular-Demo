@@ -61,7 +61,7 @@ extern CellularCommInterface_t CellularCommInterface;
 
 /*-----------------------------------------------------------*/
 
-/* Secure socket needs application provide the cellular handle and pdn context id. */
+/* Secure socket needs application to provide the cellular handle and pdn context id. */
 /* User of secure sockets cellular should provide this variable. */
 CellularHandle_t CellularHandle = NULL;
 

@@ -77,7 +77,7 @@ extern uint8_t CellularSocketPdnContextId;
 #define SOCKET_CLOSE_CALLBACK_BIT            ( 0x00000008U )
 
 /* Ticks MS conversion macros. */
-#define TICKS_TO_MS( xTicks )    ( ( ( xTicks ) * 1000U ) / ( ( uint32_t ) configTICK_RATE_HZ ) )
+#define TICKS_TO_MS( xTicks )                  ( ( ( xTicks ) * 1000U ) / ( ( uint32_t ) configTICK_RATE_HZ ) )
 #define UINT32_MAX_DELAY_MS                    ( 0xFFFFFFFFUL )
 #define UINT32_MAX_MS_TICKS                    ( UINT32_MAX_DELAY_MS / ( TICKS_TO_MS( 1U ) ) )
 
@@ -116,23 +116,117 @@ typedef struct xSOCKET
 
 /*-----------------------------------------------------------*/
 
+/**
+ * @brief Get the count of milliseconds since vTaskStartScheduler was called.
+ *
+ * @return The count of milliseconds since vTaskStartScheduler was called.
+ */
 static uint64_t getTimeMs( void );
+
+/**
+ * @brief Receive data from cellular socket.
+ *
+ * @param[in] pCellularSocketContext Cellular socket wrapper context for socket operations.
+ * @param[out] buf The data buffer for receiving data.
+ * @param[in] len The length of the data buffer
+ *
+ * @note This function receives data. It returns when non-zero bytes of data is received,
+ * when an error occurs, or when timeout occurs. Receive timeout unit is TickType_t.
+ * Any timeout value bigger than portMAX_DELAY will be regarded as portMAX_DELAY.
+ * In this case, this function waits portMAX_DELAY until non-zero bytes of data is received
+ * or until an error occurs.
+ *
+ * @return Positive value indicate the number of bytes received. Otherwise, error code defined
+ * in sockets_wrapper.h is returned.
+ */
 static BaseType_t prvNetworkRecvCellular( const cellularSocketWrapper_t * pCellularSocketContext,
                                           uint8_t * buf,
                                           size_t len );
+/**
+ * @brief Callback used to inform about the status of socket open.
+ *
+ * @param[in] urcEvent URC Event that happened.
+ * @param[in] socketHandle Socket handle for which data is ready.
+ * @param[in] pCallbackContext pCallbackContext parameter in
+ * Cellular_SocketRegisterSocketOpenCallback function.
+ */
 static void prvCellularSocketOpenCallback( CellularUrcEvent_t urcEvent,
                                            CellularSocketHandle_t socketHandle,
                                            void * pCallbackContext );
+
+/**
+ * @brief Callback used to inform that data is ready for reading on a socket.
+ *
+ * @param[in] socketHandle Socket handle for which data is ready.
+ * @param[in] pCallbackContext pCallbackContext parameter in
+ * Cellular_SocketRegisterDataReadyCallback function.
+ */
 static void prvCellularSocketDataReadyCallback( CellularSocketHandle_t socketHandle,
                                                 void * pCallbackContext );
+
+
+/**
+ * @brief Callback used to inform that remote end closed the connection for a
+ * connected socket.
+ *
+ * @param[in] socketHandle Socket handle for which remote end closed the
+ * connection.
+ * @param[in] pCallbackContext pCallbackContext parameter in
+ * Cellular_SocketRegisterClosedCallback function.
+ */
 static void prvCellularSocketClosedCallback( CellularSocketHandle_t socketHandle,
                                              void * pCallbackContext );
+
+/**
+ * @brief Setup socket receive timeout.
+ *
+ * @param[in] pCellularSocketContext Cellular socket wrapper context for socket operations.
+ * @param[out] receiveTimeout Socket receive timeout in TickType_t.
+ *
+ * @return On success, SOCKETS_ERROR_NONE is returned. If an error occurred, error code defined
+ * in sockets_wrapper.h is returned.
+ */
 static BaseType_t prvSetupSocketRecvTimeout( cellularSocketWrapper_t * pCellularSocketContext,
                                              TickType_t receiveTimeout );
+
+/**
+ * @brief Setup socket send timeout.
+ *
+ * @param[in] pCellularSocketContext Cellular socket wrapper context for socket operations.
+ * @param[out] sendTimeout Socket send timeout in TickType_t.
+ *
+ * @note Send timeout unit is TickType_t. The underlying cellular API uses miliseconds for timeout.
+ * Any send timeout greater than UINT32_MAX_MS_TICKS( UINT32_MAX_DELAY_MS/MS_PER_TICKS ) or
+ * portMAX_DELAY is regarded as UINT32_MAX_DELAY_MS for cellular API.
+ *
+ * @return On success, SOCKETS_ERROR_NONE is returned. If an error occurred, error code defined
+ * in sockets_wrapper.h is returned.
+ */
 static BaseType_t prvSetupSocketSendTimeout( cellularSocketWrapper_t * pCellularSocketContext,
                                              TickType_t sendTimeout );
+
+/**
+ * @brief Setup cellular socket callback function.
+ *
+ * @param[in] CellularSocketHandle_t Cellular socket handle for cellular socket operations.
+ * @param[in] pCellularSocketContext Cellular socket wrapper context for socket operations.
+ *
+ * @return On success, SOCKETS_ERROR_NONE is returned. If an error occurred, error code defined
+ * in sockets_wrapper.h is returned.
+ */
 static BaseType_t prvCellularSocketRegisterCallback( CellularSocketHandle_t cellularSocketHandle,
                                                      cellularSocketWrapper_t * pCellularSocketContext );
+
+/**
+ * @brief Calculate elapsed time from current time and input parameters.
+ *
+ * @param[in] entryTimeMs The entry time to be compared with current time.
+ * @param[in] timeoutValueMs Timeout value for the comparison between entry time and current time.
+ * @param[out] pElapsedTimeMs The elapsed time if timeout condition is true.
+ *
+ * @return Ture if the difference between entry time and current time is bigger or
+ * equal to timeoutValueMs. Otherwise, return false.
+ */
 static bool _calculateElapsedTime( uint64_t entryTimeMs,
                                    uint32_t timeoutValueMs,
                                    uint64_t * pElapsedTimeMs );
@@ -156,17 +250,12 @@ static uint64_t getTimeMs( void )
     /* Add the current tick count. */
     ullTickCount += xCurrentTime.xTimeOnEntering;
 
-    /* Return the ticks converted to Milliseconds */
+    /* Return the ticks converted to milliseconds. */
     return ullTickCount * _MILLISECONDS_PER_TICK;
 }
 
 /*-----------------------------------------------------------*/
 
-/* This function receives data. It returns when non-zero bytes of data is received,
- * when an error occurs, or when timeout occurs. Receive timeout unit is TickType_t.
- * Any timeout value bigger than portMAX_DELAY will be regarded as max delay.
- * In this case, this function will not return until non-zero bytes of data is received
- * or until an error occurs. */
 static BaseType_t prvNetworkRecvCellular( const cellularSocketWrapper_t * pCellularSocketContext,
                                           uint8_t * buf,
                                           size_t len )
@@ -353,9 +442,6 @@ static BaseType_t prvSetupSocketRecvTimeout( cellularSocketWrapper_t * pCellular
 
 /*-----------------------------------------------------------*/
 
-/* Send timeout unit is TickType_t. The underlying cellular API uses miliseconds for timeout.
- * Any send timeout greater than UINT32_MAX_MS_TICKS( UINT32_MAX_DELAY_MS/MS_PER_TICKS ) or
- * portMAX_DELAY is regarded as UINT32_MAX_DELAY_MS for cellular API. */
 static BaseType_t prvSetupSocketSendTimeout( cellularSocketWrapper_t * pCellularSocketContext,
                                              TickType_t sendTimeout )
 {

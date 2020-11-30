@@ -51,7 +51,7 @@ static void prvThreadRoutineWrapper( void * pArgument );
  * @brief Lock mutex with timeout.
  *
  * @param[in] pMutex Mutex to lock.
- * @param[in] timeout timeout value to lock mutex.
+ * @param[in] timeout Timeout value to lock mutex.
  *
  * @return ture if mutex is locked successfully. Otherwise false.
  */
@@ -76,7 +76,7 @@ static void prvThreadRoutineWrapper( void * pArgument )
 static bool prIotMutexTimedLock( PlatformMutex_t * pMutex,
                                  TickType_t timeout )
 {
-    BaseType_t lockResult;
+    BaseType_t lockResult = pdTRUE;
 
     configASSERT( pMutex != NULL );
 
@@ -103,11 +103,13 @@ bool Platform_CreateDetachedThread( void ( *threadRoutine )( void * ),
                                     size_t stackSize )
 {
     bool status = true;
+    threadInfo_t * pThreadInfo = NULL;
 
     configASSERT( threadRoutine != NULL );
 
     CellularLogDebug( "Creating new thread." );
-    threadInfo_t * pThreadInfo = Platform_Malloc( sizeof( threadInfo_t ) );
+
+    pThreadInfo = Platform_Malloc( sizeof( threadInfo_t ) );
 
     if( pThreadInfo == NULL )
     {
@@ -116,7 +118,7 @@ bool Platform_CreateDetachedThread( void ( *threadRoutine )( void * ),
     }
 
     /* Create the FreeRTOS task that will run the thread. */
-    if( status )
+    if( status == true )
     {
         pThreadInfo->threadRoutine = threadRoutine;
         pThreadInfo->pArgument = pArgument;
@@ -133,6 +135,10 @@ bool Platform_CreateDetachedThread( void ( *threadRoutine )( void * ),
             Platform_Free( pThreadInfo );
             status = false;
         }
+        else
+        {
+            CellularLogDebug( "New thread created." );
+        }
     }
 
     return status;
@@ -143,21 +149,24 @@ bool Platform_CreateDetachedThread( void ( *threadRoutine )( void * ),
 bool PlatformMutex_Create( PlatformMutex_t * pNewMutex,
                            bool recursive )
 {
+    SemaphoreHandle_t xSemaphore = NULL;
+    bool retMutexCreate = false;
+
     configASSERT( pNewMutex != NULL );
 
     CellularLogDebug( "Creating new mutex %p.", pNewMutex );
 
-    if( recursive )
+    if( recursive == true )
     {
-        ( void ) xSemaphoreCreateRecursiveMutexStatic( &pNewMutex->xMutex );
+        xSemaphore = xSemaphoreCreateRecursiveMutexStatic( &pNewMutex->xMutex );
     }
     else
     {
-        ( void ) xSemaphoreCreateMutexStatic( &pNewMutex->xMutex );
+        xSemaphore = xSemaphoreCreateMutexStatic( &pNewMutex->xMutex );
     }
 
-    /* remember the type of mutex */
-    if( recursive )
+    /* Remember the type of mutex. */
+    if( recursive == true )
     {
         pNewMutex->recursive = pdTRUE;
     }
@@ -166,7 +175,17 @@ bool PlatformMutex_Create( PlatformMutex_t * pNewMutex,
         pNewMutex->recursive = pdFALSE;
     }
 
-    return true;
+    /* Check the handle value returned by the mutex create function. */
+    if( xSemaphore == NULL )
+    {
+        retMutexCreate = false;
+    }
+    else
+    {
+        retMutexCreate = true;
+    }
+
+    return retMutexCreate;
 }
 
 /*-----------------------------------------------------------*/

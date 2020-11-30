@@ -78,7 +78,7 @@
 
 /* Platform thread stack size and priority. */
 #define COMM_IF_THREAD_DEFAULT_STACK_SIZE    ( 2048U )
-#define COMM_IF_THREAD_DEFAULT_PRIORITY      ( 5U )
+#define COMM_IF_THREAD_DEFAULT_PRIORITY      ( tskIDLE_PRIORITY + 5U )
 
 /*-----------------------------------------------------------*/
 
@@ -88,7 +88,7 @@ typedef struct _cellularCommContext
     HANDLE commReceiveCallbackThread;
     uint8_t commStatus;
     void * pUserData;
-    CellularCommInterfaceHandle_t commInterfaceHandle;
+    HANDLE commFileHandle;
     CellularCommInterface_t * pCommInterface;
     bool commTaskThreadStarted;
     EventGroupHandle_t pCommTaskEvent;
@@ -96,27 +96,98 @@ typedef struct _cellularCommContext
 
 /*-----------------------------------------------------------*/
 
+/**
+ * @brief CellularCommInterfaceOpen_t implementation.
+ */
 static CellularCommInterfaceError_t _prvCommIntfOpen( CellularCommInterfaceReceiveCallback_t receiveCallback,
                                                       void * pUserData,
                                                       CellularCommInterfaceHandle_t * pCommInterfaceHandle );
+
+/**
+ * @brief CellularCommInterfaceSend_t implementation.
+ */
 static CellularCommInterfaceError_t _prvCommIntfSend( CellularCommInterfaceHandle_t commInterfaceHandle,
                                                       const uint8_t * pData,
                                                       uint32_t dataLength,
                                                       uint32_t timeoutMilliseconds,
                                                       uint32_t * pDataSentLength );
+
+/**
+ * @brief CellularCommInterfaceRecv_t implementation.
+ */
 static CellularCommInterfaceError_t _prvCommIntfReceive( CellularCommInterfaceHandle_t commInterfaceHandle,
                                                          uint8_t * pBuffer,
                                                          uint32_t bufferLength,
                                                          uint32_t timeoutMilliseconds,
                                                          uint32_t * pDataReceivedLength );
+
+/**
+ * @brief CellularCommInterfaceClose_t implementation.
+ */
 static CellularCommInterfaceError_t _prvCommIntfClose( CellularCommInterfaceHandle_t commInterfaceHandle );
+
+/**
+ * @brief Get default comm interface context.
+ *
+ * @return On success, SOCKETS_ERROR_NONE is returned. If an error occurred, error code defined
+ * in sockets_wrapper.h is returned.
+ */
 static _cellularCommContext_t * _getCellularCommContext( void );
+
+/**
+ * @brief UART interrupt handler.
+ *
+ * @return pdTRUE if the operation is successful, otherwise
+ * an error code indicating the cause of the error.
+ */
 static uint32_t prvProcessUartInt( void );
+
+/**
+ * @brief Set COM port timeout settings.
+ *
+ * @param[in] hComm COM handle returned by CreateFile.
+ *
+ * @return On success, IOT_COMM_INTERFACE_SUCCESS is returned. If an error occurred, error code defined
+ * in CellularCommInterfaceError_t is returned.
+ */
 static CellularCommInterfaceError_t _setupCommTimeout( HANDLE hComm );
+
+/**
+ * @brief Set COM port control settings.
+ *
+ * @param[in] hComm COM handle returned by CreateFile.
+ *
+ * @return On success, IOT_COMM_INTERFACE_SUCCESS is returned. If an error occurred, error code defined
+ * in CellularCommInterfaceError_t is returned.
+ */
 static CellularCommInterfaceError_t _setupCommSettings( HANDLE hComm );
+
+/**
+ * @brief Thread routine to generate simulated interrupt.
+ *
+ * @param[in] pUserData Pointer to _cellularCommContext_t allocated in comm interface open.
+ */
 static void commTaskThread( void * pUserData );
+
+/**
+ * @brief Helper function to setup and create commTaskThread.
+ *
+ * @param[in] pCellularCommContext Cellular comm interface context allocated in open.
+ *
+ * @return On success, IOT_COMM_INTERFACE_SUCCESS is returned. If an error occurred, error code defined
+ * in CellularCommInterfaceError_t is returned.
+ */
 static CellularCommInterfaceError_t setupCommTaskThread( _cellularCommContext_t * pCellularCommContext );
-static BOOL cleanCommTaskThread( _cellularCommContext_t * pCellularCommContext );
+
+/**
+ * @brief Helper function to clean commTaskThread.
+ *
+ * @param[in] pCellularCommContext Cellular comm interface context allocated in open.
+ *
+ * @return On success, IOT_COMM_INTERFACE_SUCCESS is returned. If an error occurred, error code defined
+ * in CellularCommInterfaceError_t is returned.
+ */
+static CellularCommInterfaceError_t cleanCommTaskThread( _cellularCommContext_t * pCellularCommContext );
 
 /*-----------------------------------------------------------*/
 
@@ -133,7 +204,7 @@ static _cellularCommContext_t _iotCellularCommContext =
     .commReceiveCallback       = NULL,
     .commReceiveCallbackThread = NULL,
     .pCommInterface            = &CellularCommInterface,
-    .commInterfaceHandle       = NULL,
+    .commFileHandle            = NULL,
     .pUserData                 = NULL,
     .commStatus                = 0U,
     .commTaskThreadStarted     = false,
@@ -145,11 +216,6 @@ static bool rxEvent = false;
 
 /*-----------------------------------------------------------*/
 
-/**
- * @brief Get Cellular comm interface context.
- *
- * @return pointer to _cellularCommContext_t instance.
- */
 static _cellularCommContext_t * _getCellularCommContext( void )
 {
     return &_iotCellularCommContext;
@@ -157,23 +223,28 @@ static _cellularCommContext_t * _getCellularCommContext( void )
 
 /*-----------------------------------------------------------*/
 
-/**
- * @brief UART interrupt handler.
- *
- * @return pdTRUE if the operation is successful, otherwise
- * an error code indicating the cause of the error.
- */
 static uint32_t prvProcessUartInt( void )
 {
     _cellularCommContext_t * pCellularCommContext = _getCellularCommContext();
+    CellularCommInterfaceError_t callbackRet = IOT_COMM_INTERFACE_FAILURE;
+    uint32_t retUartInt = pdTRUE;
 
     if( pCellularCommContext->commReceiveCallback != NULL )
     {
-        pCellularCommContext->commReceiveCallback( pCellularCommContext->pUserData,
-                                                   pCellularCommContext->commInterfaceHandle );
+        callbackRet = pCellularCommContext->commReceiveCallback( pCellularCommContext->pUserData,
+                                                                 ( CellularCommInterfaceHandle_t ) pCellularCommContext );
     }
 
-    return pdTRUE;
+    if( callbackRet == IOT_COMM_INTERFACE_SUCCESS )
+    {
+        retUartInt = pdTRUE;
+    }
+    else
+    {
+        retUartInt = pdFALSE;
+    }
+
+    return retUartInt;
 }
 
 /*-----------------------------------------------------------*/
@@ -182,15 +253,21 @@ static uint32_t prvProcessUartInt( void )
  * @brief Communication receiver thread function.
  *
  * @param[in] pArgument windows COM port handle.
- * @return 0 if thread function exit.
+ * @return 0 if thread function exit without error. Others for error.
  */
 DWORD WINAPI _CellularCommReceiveCBThreadFunc( LPVOID pArgument )
 {
     DWORD dwCommStatus = 0;
     HANDLE hComm = ( HANDLE ) pArgument;
     BOOL retWait = FALSE;
+    DWORD retValue = 0;
 
-    while( TRUE )
+    if( hComm == ( HANDLE ) INVALID_HANDLE_VALUE )
+    {
+        retValue = ERROR_INVALID_HANDLE;
+    }
+
+    while( retValue == 0 )
     {
         retWait = WaitCommEvent( hComm, &dwCommStatus, NULL );
 
@@ -213,11 +290,13 @@ DWORD WINAPI _CellularCommReceiveCBThreadFunc( LPVOID pArgument )
                 CellularLogInfo( "Cellular receiver thread wait comm error %p %d", hComm, GetLastError() );
             }
 
+            retValue = GetLastError();
+
             break;
         }
     }
 
-    return 0;
+    return retValue;
 }
 
 /*-----------------------------------------------------------*/
@@ -297,7 +376,7 @@ static void commTaskThread( void * pUserData )
 
     while( true )
     {
-        /* Wait for instruction from eventqueue. */
+        /* Wait for notification from eventqueue. */
         uxBits = xEventGroupWaitBits( ( pCellularCommContext->pCommTaskEvent ),
                                       ( ( EventBits_t ) COMMTASK_EVT_MASK_ABORT ),
                                       pdTRUE,
@@ -381,7 +460,7 @@ static CellularCommInterfaceError_t setupCommTaskThread( _cellularCommContext_t 
 
 /*-----------------------------------------------------------*/
 
-static BOOL cleanCommTaskThread( _cellularCommContext_t * pCellularCommContext )
+static CellularCommInterfaceError_t cleanCommTaskThread( _cellularCommContext_t * pCellularCommContext )
 {
     EventBits_t uxBits = 0;
     CellularCommInterfaceError_t commIntRet = IOT_COMM_INTERFACE_SUCCESS;
@@ -526,7 +605,7 @@ static CellularCommInterfaceError_t _prvCommIntfOpen( CellularCommInterfaceRecei
     if( commIntRet == IOT_COMM_INTERFACE_SUCCESS )
     {
         pCellularCommContext->pUserData = pUserData;
-        pCellularCommContext->commInterfaceHandle = ( CellularCommInterfaceHandle_t ) hComm;
+        pCellularCommContext->commFileHandle = hComm;
         *pCommInterfaceHandle = ( CellularCommInterfaceHandle_t ) pCellularCommContext;
         pCellularCommContext->commStatus |= CELLULAR_COMM_OPEN_BIT;
     }
@@ -537,6 +616,7 @@ static CellularCommInterfaceError_t _prvCommIntfOpen( CellularCommInterfaceRecei
         {
             ( void ) CloseHandle( hComm );
             hComm = INVALID_HANDLE_VALUE;
+            commIntRet = IOT_COMM_INTERFACE_FAILURE;
         }
 
         /* Wait for the commReceiveCallbackThread exit. */
@@ -585,7 +665,7 @@ static CellularCommInterfaceError_t _prvCommIntfClose( CellularCommInterfaceHand
         pCellularCommContext->commReceiveCallback = NULL;
 
         /* Close the COM port. */
-        hComm = pCellularCommContext->commInterfaceHandle;
+        hComm = pCellularCommContext->commFileHandle;
 
         if( hComm != ( HANDLE ) INVALID_HANDLE_VALUE )
         {
@@ -602,7 +682,7 @@ static CellularCommInterfaceError_t _prvCommIntfClose( CellularCommInterfaceHand
             commIntRet = IOT_COMM_INTERFACE_FAILURE;
         }
 
-        pCellularCommContext->commInterfaceHandle = NULL;
+        pCellularCommContext->commFileHandle = NULL;
 
         /* Wait for the thread exit. */
         if( pCellularCommContext->commReceiveCallbackThread != NULL )
@@ -614,6 +694,10 @@ static CellularCommInterfaceError_t _prvCommIntfClose( CellularCommInterfaceHand
                 CellularLogDebug( "Cellular close wait receiveCallbackThread %p fail %d",
                                   pCellularCommContext->commReceiveCallbackThread, dwRes );
                 commIntRet = IOT_COMM_INTERFACE_FAILURE;
+            }
+            else
+            {
+                CloseHandle( pCellularCommContext->commReceiveCallbackThread );
             }
         }
 
@@ -656,7 +740,7 @@ static CellularCommInterfaceError_t _prvCommIntfSend( CellularCommInterfaceHandl
     }
     else
     {
-        hComm = pCellularCommContext->commInterfaceHandle;
+        hComm = pCellularCommContext->commFileHandle;
         osWrite.hEvent = CreateEvent( NULL, TRUE, FALSE, NULL );
 
         if( osWrite.hEvent == NULL )
@@ -754,7 +838,7 @@ static CellularCommInterfaceError_t _prvCommIntfReceive( CellularCommInterfaceHa
     }
     else
     {
-        hComm = pCellularCommContext->commInterfaceHandle;
+        hComm = pCellularCommContext->commFileHandle;
         osRead.hEvent = CreateEvent( NULL, TRUE, FALSE, NULL );
 
         if( osRead.hEvent == NULL )

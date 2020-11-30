@@ -37,7 +37,7 @@
 /**
  * Cellular comm interface make use of COM port on computer to communicate with
  * cellular module on windows simulator, for example "COM5".
- * #define CELLULAR_COMM_INTERFACE_PORT                   "...insert here..."
+ * #define CELLULAR_COMM_INTERFACE_PORT    "...insert here..."
  */
 
 /*

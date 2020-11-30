@@ -146,7 +146,7 @@
 
 /**
  * @brief Time in ticks to wait between each cycle of the demo implemented
- * by prvMQTTDemoTask().
+ * by RunMQTTTask().
  */
 #define mqttexampleDELAY_BETWEEN_DEMO_ITERATIONS_TICKS    ( pdMS_TO_TICKS( 5000U ) )
 
@@ -256,7 +256,7 @@
  * @param[in] pvParameters Parameters as passed at the time of task creation. Not
  * used in this example.
  */
-void MQTTDemoTask( void * pvParameters );
+void RunMQTTTask( void * pvParameters );
 
 /**
  * @brief Connect to MQTT broker with reconnection retries.
@@ -427,7 +427,7 @@ static MQTTFixedBuffer_t xBuffer =
  * subscribed to, so it will expect all the messages it sends to the broker to be
  * sent back to it from the broker.
  */
-void MQTTDemoTask( void * pvParameters )
+void RunMQTTTask( void * pvParameters )
 {
     uint32_t ulPublishCount = 0U, ulTopicCount = 0U;
     const uint32_t ulMaxPublishCount = 5UL;
@@ -522,7 +522,7 @@ void MQTTDemoTask( void * pvParameters )
 
         /* Wait for some time between two iterations to ensure that we do not
          * bombard the broker. */
-        LogInfo( ( "prvMQTTDemoTask() completed an iteration successfully. "
+        LogInfo( ( "RunMQTTTask() completed an iteration successfully. "
                    "Total free heap is %u.\r\n",
                    xPortGetFreeHeapSize() ) );
         LogInfo( ( "Demo completed successfully.\r\n" ) );
