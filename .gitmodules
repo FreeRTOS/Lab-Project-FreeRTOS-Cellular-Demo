@@ -5,8 +5,11 @@
 	path = lib/coreMQTT
 	url = https://github.com/FreeRTOS/coreMQTT
 [submodule "lib/mbedtls"]
-	path = lib/mbedtls
+	path = lib/ThirdParty/mbedtls
 	url = https://github.com/ARMmbed/mbedtls
 [submodule "lib/cellular"]
 	path = lib/cellular
 	url = https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-HAL
+[submodule "lib/backoff_algorithm"]
+	path = lib/backoff_algorithm
+	url = https://github.com/FreeRTOS/backoffAlgorithm

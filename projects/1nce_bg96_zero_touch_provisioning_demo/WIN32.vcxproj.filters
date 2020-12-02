@@ -31,9 +31,6 @@
     <Filter Include="lib\FreeRTOS">
       <UniqueIdentifier>{e9fe61c2-af65-4800-821c-4f37616f50c7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="lib\mbedtls">
-      <UniqueIdentifier>{009125cf-7a1f-48bd-93c2-25bbc1455d1c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="source">
       <UniqueIdentifier>{fdde7623-f419-457e-ad4b-7fce3c81dcf2}</UniqueIdentifier>
     </Filter>
@@ -52,12 +49,6 @@
     <Filter Include="lib\FreeRTOS\portable">
       <UniqueIdentifier>{5e3174b8-3a7e-4c39-a85e-abee2d1b6779}</UniqueIdentifier>
     </Filter>
-    <Filter Include="lib\mbedtls\library">
-      <UniqueIdentifier>{a6932102-8634-4f0d-a620-c890029ef898}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="lib\mbedtls\include">
-      <UniqueIdentifier>{ae50ecd0-2079-49aa-9868-b7d9f4ca732c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="lib\coreMQTT\src\portable">
       <UniqueIdentifier>{e2a26545-385c-4e4e-b4fa-4da637880b5e}</UniqueIdentifier>
     </Filter>
@@ -72,6 +63,24 @@
     </Filter>
     <Filter Include="source\cellular">
       <UniqueIdentifier>{7006a8e9-3bd5-4473-944e-bcb717192bf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\ThirdParty">
+      <UniqueIdentifier>{52c7f9c0-53cf-4851-a689-da00043a65c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\ThirdParty\mbedtls">
+      <UniqueIdentifier>{0f442c0f-e4ac-4c8f-a5ec-2449209a671f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\backoff_algorithm">
+      <UniqueIdentifier>{22c5e58d-e35d-401d-8b73-35a56a6fe825}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\backoff_algorithm\include">
+      <UniqueIdentifier>{08a51dc9-cc0f-469f-a877-638d99fc595a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\ThirdParty\mbedtls\include">
+      <UniqueIdentifier>{ff524856-7813-4d9e-8220-2dbbb03721ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\ThirdParty\mbedtls\library">
+      <UniqueIdentifier>{a79f2260-329c-4e16-b9af-1cde033925f8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -153,277 +162,10 @@
     <ClInclude Include="..\..\lib\FreeRTOS\include\portable.h">
       <Filter>lib\FreeRTOS\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\library\common.h">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\library\psa_crypto_core.h">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\library\psa_crypto_invasive.h">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\library\psa_crypto_its.h">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\library\psa_crypto_se.h">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\library\psa_crypto_service_integration.h">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\library\psa_crypto_slot_management.h">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\library\psa_crypto_storage.h">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\library\ssl_invasive.h">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\asn1write.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\base64.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\bignum.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\blowfish.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\bn_mul.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\camellia.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\ccm.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\certs.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\chacha20.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\chachapoly.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\check_config.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\cipher.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\cipher_internal.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\cmac.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\compat-1.3.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\config.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\ctr_drbg.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\debug.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\des.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\dhm.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\ecdh.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\ecdsa.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\ecjpake.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\ecp.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\ecp_internal.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\entropy.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\entropy_poll.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\error.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\gcm.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\havege.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\hkdf.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\hmac_drbg.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\md.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\md_internal.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\md2.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\md4.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\md5.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\memory_buffer_alloc.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\net.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\net_sockets.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\nist_kw.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\oid.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\padlock.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\pem.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\pk.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\pk_internal.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\pkcs5.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\pkcs11.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\pkcs12.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\platform.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\platform_time.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\platform_util.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\poly1305.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\psa_util.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\ripemd160.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\rsa.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\rsa_internal.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\sha1.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\sha256.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\sha512.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\ssl.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\ssl_cache.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\ssl_ciphersuites.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\ssl_cookie.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\ssl_internal.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\ssl_ticket.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\threading.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\timing.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\version.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\x509.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\x509_crl.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\x509_crt.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\x509_csr.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\xtea.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\aes.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\aesni.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\arc4.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\aria.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\mbedtls\include\mbedtls\asn1.h">
-      <Filter>lib\mbedtls\include</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\lib\coreMQTT\source\portable\transport_interface.h">
       <Filter>lib\coreMQTT\src\portable</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\demo_config.h">
-      <Filter>source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\exponential_backoff.h">
       <Filter>source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\logging_levels.h">
@@ -461,6 +203,273 @@
     </ClInclude>
     <ClInclude Include="..\..\source\1nce_zero_touch_provisioning.h">
       <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\backoff_algorithm\source\include\backoff_algorithm.h">
+      <Filter>lib\backoff_algorithm\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\aes.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\aesni.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\arc4.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\aria.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\asn1.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\asn1write.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\base64.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\bignum.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\blowfish.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\bn_mul.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\camellia.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\ccm.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\certs.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\chacha20.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\chachapoly.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\check_config.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\cipher.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\cipher_internal.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\cmac.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\compat-1.3.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\config.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\ctr_drbg.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\debug.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\des.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\dhm.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\ecdh.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\ecdsa.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\ecjpake.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\ecp.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\ecp_internal.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\entropy.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\entropy_poll.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\error.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\gcm.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\havege.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\hkdf.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\hmac_drbg.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\md.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\md_internal.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\md2.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\md4.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\md5.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\memory_buffer_alloc.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\net.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\net_sockets.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\nist_kw.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\oid.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\padlock.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\pem.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\pk.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\pk_internal.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\pkcs5.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\pkcs11.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\pkcs12.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\platform.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\platform_time.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\platform_util.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\poly1305.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\psa_util.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\ripemd160.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\rsa.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\rsa_internal.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\sha1.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\sha256.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\sha512.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\ssl.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\ssl_cache.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\ssl_ciphersuites.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\ssl_cookie.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\ssl_internal.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\ssl_ticket.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\threading.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\timing.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\version.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\x509.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\x509_crl.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\x509_crt.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\x509_csr.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\xtea.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\library\common.h">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\library\psa_crypto_core.h">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\library\psa_crypto_invasive.h">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\library\psa_crypto_its.h">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\library\psa_crypto_se.h">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\library\psa_crypto_service_integration.h">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\library\psa_crypto_slot_management.h">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\library\psa_crypto_storage.h">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\library\ssl_invasive.h">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -530,262 +539,7 @@
     <ClCompile Include="..\..\lib\FreeRTOS\portable\MemMang\heap_4.c">
       <Filter>lib\FreeRTOS\portable</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\certs.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\chacha20.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\chachapoly.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\cipher.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\cipher_wrap.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\cmac.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\ctr_drbg.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\debug.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\des.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\dhm.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\ecdh.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\ecdsa.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\ecjpake.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\ecp.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\ecp_curves.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\entropy.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\entropy_poll.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\error.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\gcm.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\havege.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\hkdf.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\hmac_drbg.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\md.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\md2.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\md4.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\md5.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\memory_buffer_alloc.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\net_sockets.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\nist_kw.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\oid.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\padlock.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\pem.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\pk.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\pk_wrap.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\pkcs5.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\pkcs11.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\pkcs12.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\pkparse.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\pkwrite.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\platform.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\platform_util.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\poly1305.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\psa_crypto.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\psa_crypto_se.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\psa_crypto_slot_management.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\psa_crypto_storage.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\psa_its_file.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\ripemd160.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\rsa.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\rsa_internal.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\sha1.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\sha256.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\sha512.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\ssl_cache.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\ssl_ciphersuites.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\ssl_cli.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\ssl_cookie.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\ssl_msg.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\ssl_srv.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\ssl_ticket.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\ssl_tls.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\threading.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\timing.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\version.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\version_features.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\x509.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\x509_create.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\x509_crl.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\x509_crt.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\x509_csr.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\x509write_crt.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\x509write_csr.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\xtea.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\aes.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\aesni.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\arc4.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\aria.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\asn1parse.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\asn1write.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\base64.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\bignum.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\blowfish.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\camellia.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\mbedtls\library\ccm.c">
-      <Filter>lib\mbedtls\library</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\source\cellular_setup.c">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\exponential_backoff.c">
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\main.c">
@@ -814,6 +568,261 @@
     </ClCompile>
     <ClCompile Include="..\..\source\1nce_zero_touch_provisioning.c">
       <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\backoff_algorithm\source\backoff_algorithm.c">
+      <Filter>lib\backoff_algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\aes.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\aesni.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\arc4.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\aria.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\asn1parse.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\asn1write.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\base64.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\bignum.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\blowfish.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\camellia.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\ccm.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\certs.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\chacha20.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\chachapoly.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\cipher.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\cipher_wrap.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\cmac.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\ctr_drbg.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\debug.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\des.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\dhm.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\ecdh.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\ecdsa.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\ecjpake.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\ecp.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\ecp_curves.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\entropy.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\entropy_poll.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\error.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\gcm.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\havege.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\hkdf.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\hmac_drbg.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\md.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\md2.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\md4.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\md5.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\memory_buffer_alloc.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\net_sockets.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\nist_kw.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\oid.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\padlock.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\pem.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\pk.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\pk_wrap.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\pkcs5.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\pkcs11.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\pkcs12.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\pkparse.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\pkwrite.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\platform.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\platform_util.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\poly1305.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\psa_crypto.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\psa_crypto_se.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\psa_crypto_slot_management.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\psa_crypto_storage.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\psa_its_file.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\ripemd160.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\rsa.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\rsa_internal.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\sha1.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\sha256.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\sha512.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\ssl_cache.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\ssl_ciphersuites.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\ssl_cli.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\ssl_cookie.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\ssl_msg.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\ssl_srv.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\ssl_ticket.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\ssl_tls.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\threading.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\timing.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\version.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\version_features.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\x509.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\x509_create.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\x509_crl.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\x509_crt.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\x509_csr.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\x509write_crt.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\x509write_csr.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\xtea.c">
+      <Filter>lib\ThirdParty\mbedtls\library</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

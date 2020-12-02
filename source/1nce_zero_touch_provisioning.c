@@ -44,7 +44,7 @@
 #include "core_mqtt.h"
 
 /* Exponential backoff retry include. */
-#include "exponential_backoff.h"
+#include "backoff_algorithm.h"
 
 /* Transport interface implementation include header for TLS. */
 #include "using_mbedtls.h"
@@ -55,15 +55,32 @@
 /*-----------------------------------------------------------*/
 
 /**
+ * @brief The maximum number of retries for network operation with server.
+ */
+#define mqttexampleRETRY_MAX_ATTEMPTS            ( 5U )
+
+/**
+ * @brief The maximum back-off delay (in milliseconds) for retrying failed operation
+ *  with server.
+ */
+#define mqttexampleRETRY_MAX_BACKOFF_DELAY_MS    ( 5000U )
+
+/**
+ * @brief The base back-off delay (in milliseconds) to use for network operation retry
+ * attempts.
+ */
+#define mqttexampleRETRY_BACKOFF_BASE_MS         ( 500U )
+
+/**
  * @brief 1NCE onboarding endpoint and port.
  */
-#define ONBOARDING_ENDPOINT                  "device.connectivity-suite.cloud"
-#define ONBOARDING_PORT                      ( 443U )
+#define ONBOARDING_ENDPOINT                      "device.connectivity-suite.cloud"
+#define ONBOARDING_PORT                          ( 443U )
 
 /**
  * @brief Transport timeout in milliseconds for transport send and receive.
  */
-#define nceTRANSPORT_SEND_RECV_TIMEOUT_MS    ( 30000U )
+#define nceTRANSPORT_SEND_RECV_TIMEOUT_MS        ( 30000U )
 
 
 /**
@@ -175,6 +192,8 @@ char * str_replace( char * orig,
                     char * rep,
                     char * with );
 
+extern UBaseType_t uxRand( void );
+
 /*-----------------------------------------------------------*/
 
 uint8_t nce_onboard( char ** pThingName,
@@ -280,8 +299,9 @@ uint8_t nce_onboard( char ** pThingName,
 TlsTransportStatus_t nce_connect( NetworkContext_t * pxNetworkContext )
 {
     TlsTransportStatus_t xNetworkStatus = TLS_TRANSPORT_CONNECT_FAILURE;
-    RetryUtilsStatus_t xRetryUtilsStatus = RetryUtilsSuccess;
-    RetryUtilsParams_t xReconnectParams;
+    BackoffAlgorithmStatus_t xBackoffAlgStatus = BackoffAlgorithmSuccess;
+    BackoffAlgorithmContext_t xReconnectParams;
+    uint16_t usNextRetryBackOff = 0U;
     NetworkCredentials_t tNetworkCredentials = { 0 };
 
     LogInfo( ( "Connecting to 1NCE server." ) );
@@ -296,8 +316,10 @@ TlsTransportStatus_t nce_connect( NetworkContext_t * pxNetworkContext )
     tNetworkCredentials.privateKeySize = sizeof( democonfigCLIENT_PRIVATE_KEY_PEM );
 
     /* Initialize reconnect attempts and interval. */
-    RetryUtils_ParamsReset( &xReconnectParams );
-    xReconnectParams.maxRetryAttempts = MAX_RETRY_ATTEMPTS;
+    BackoffAlgorithm_InitializeParams( &xReconnectParams,
+                                       mqttexampleRETRY_BACKOFF_BASE_MS,
+                                       mqttexampleRETRY_MAX_BACKOFF_DELAY_MS,
+                                       mqttexampleRETRY_MAX_ATTEMPTS );
 
     /* Attempt to connect to 1NCE server. If connection fails, retry after
      * a timeout. Timeout value will exponentially increase till maximum
@@ -318,16 +340,25 @@ TlsTransportStatus_t nce_connect( NetworkContext_t * pxNetworkContext )
 
         if( xNetworkStatus != TLS_TRANSPORT_SUCCESS )
         {
-            LogWarn( ( "Connection to 1NCE server failed. Retrying connection with backoff and jitter." ) );
-            xRetryUtilsStatus = RetryUtils_BackoffAndSleep( &xReconnectParams );
-        }
+            /* Generate a random number and calculate backoff value (in milliseconds) for
+             * the next connection retry.
+             * Note: It is recommended to seed the random number generator with a device-specific
+             * entropy source so that possibility of multiple devices retrying failed network operations
+             * at similar intervals can be avoided. */
+            xBackoffAlgStatus = BackoffAlgorithm_GetNextBackoff( &xReconnectParams, uxRand(), &usNextRetryBackOff );
 
-        if( xRetryUtilsStatus == RetryUtilsRetriesExhausted )
-        {
-            LogError( ( "Connection to 1NCE server failed, all attempts exhausted." ) );
-            xNetworkStatus = TLS_TRANSPORT_CONNECT_FAILURE;
+            if( xBackoffAlgStatus == BackoffAlgorithmRetriesExhausted )
+            {
+                LogError( ( "Connection to the broker failed, all attempts exhausted." ) );
+            }
+            else if( xBackoffAlgStatus == BackoffAlgorithmSuccess )
+            {
+                LogWarn( ( "Connection to the broker failed. "
+                           "Retrying connection with backoff and jitter." ) );
+                vTaskDelay( pdMS_TO_TICKS( usNextRetryBackOff ) );
+            }
         }
-    } while ( ( xNetworkStatus != TLS_TRANSPORT_SUCCESS ) && ( xRetryUtilsStatus == RetryUtilsSuccess ) );
+    } while ( ( xNetworkStatus != TLS_TRANSPORT_SUCCESS ) && ( xBackoffAlgStatus == BackoffAlgorithmSuccess ) );
 
     return xNetworkStatus;
 }
