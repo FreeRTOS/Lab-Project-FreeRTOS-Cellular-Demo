@@ -4,7 +4,7 @@
 
 FreeRTOS offers a suite of networking stacks designed for IoT applications.  Applications can access communication protocols at different levels - MQTT, HTTP, Secure Sockets, etc.  Common connectivity technologies such as Ethernet, Wi-Fi and BLE have been integrated with the networking stacks of FreeRTOS, with a [wide selection of microcontrollers and modules](https://devices.amazonaws.com/search?page=1&sv=freertos) pre-integrated. 
 
-The demos in this project demonstrate how to establish mutually authenticated MQTT connections to MQTT brokers, such as AWS IoT Core, by using cellular connectivity.  The demos use the [Cellular HAL libraries](http://ec2-52-36-17-39.us-west-2.compute.amazonaws.com/cellular/index.html) sub-moduled from an external project.  The Cellular HAL libraries expose the capability of a few popular cellular modems through a uniform API.  
+The demos in this project demonstrate how to establish mutually authenticated MQTT connections to MQTT brokers, such as AWS IoT Core, by using cellular connectivity.  The demos use the [Cellular HAL libraries](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-HAL/raw/main/doc/document/cellular.zip) sub-moduled from an external project.  The Cellular HAL libraries expose the capability of a few popular cellular modems through a uniform API.  
 
 1. Quectel BG96
 2. Sierra Wireless HL7802
@@ -51,7 +51,7 @@ The other components shown as blue boxes and dotted lines are implemented by thi
 
 ## Developer References and API Documents
 
-Please refer to [cellular HAL library API document.](http://ec2-52-36-17-39.us-west-2.compute.amazonaws.com/cellular/index.html)
+Please refer to [cellular HAL library API document.](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-HAL/raw/main/doc/document/cellular.zip)
 
 
 ## Download the source code
