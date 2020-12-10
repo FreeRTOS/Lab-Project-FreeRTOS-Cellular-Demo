@@ -35,7 +35,7 @@
 /* Sockets wrapper includes. */
 #include "sockets_wrapper.h"
 
-/* Cellular HAL api includes. */
+/* FreeRTOS Cellular Library api includes. */
 #include "cellular_config.h"
 #include "cellular_config_defaults.h"
 #include "cellular_api.h"

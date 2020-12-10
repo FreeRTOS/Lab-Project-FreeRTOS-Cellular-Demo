@@ -51,7 +51,7 @@ static UBaseType_t ulNextRand;
 
 /*-----------------------------------------------------------*/
 
-/* Cellular HAL init and setup cellular network registration. */
+/* FreeRTOS Cellular Library init and setup cellular network registration. */
 extern bool setupCellular( void );
 
 /* MQTT demo application. */
@@ -89,8 +89,8 @@ int main( void )
      * See https://www.FreeRTOS.org/mqtt_lts/index.html for configuration and usage instructions.
      ***/
 
-    /* Cellular HAL init needs thread ready environment.
-     * CellularDemoTask invoke setupCellular to init cellular HAL and register network.
+    /* FreeRTOS Cellular Library init needs thread ready environment.
+     * CellularDemoTask invoke setupCellular to init FreeRTOS Cellular Library and register network.
      * Then it runs the MQTT demo. */
     xTaskCreate( CellularDemoTask,         /* Function that implements the task. */
                  "CellularDemo",           /* Text name for the task - only used for debugging. */

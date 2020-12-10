@@ -1,16 +1,16 @@
-# FreeRTOS Labs - Cellular Demo
+# FreeRTOS Labs - FreeRTOS Cellular Library Demo
 
 ## Introduction
 
-FreeRTOS offers a suite of networking stacks designed for IoT applications.  Applications can access communication protocols at different levels - MQTT, HTTP, Secure Sockets, etc.  Common connectivity technologies such as Ethernet, Wi-Fi and BLE have been integrated with the networking stacks of FreeRTOS, with a [wide selection of microcontrollers and modules](https://devices.amazonaws.com/search?page=1&sv=freertos) pre-integrated. 
+FreeRTOS offers a suite of networking stacks designed for IoT applications.  Applications can access communication protocols at different levels - MQTT, HTTP, Secure Sockets, etc.  Common connectivity technologies such as Ethernet, Wi-Fi and BLE have been integrated with the networking stacks of FreeRTOS, with [a wide selection of microcontrollers and modules](https://devices.amazonaws.com/search?page=1&sv=freertos) pre-integrated.
 
-The demos in this project demonstrate how to establish mutually authenticated MQTT connections to MQTT brokers, such as AWS IoT Core, by using cellular connectivity.  The demos use the [Cellular HAL libraries](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-HAL/raw/main/doc/document/cellular.zip) sub-moduled from an external project.  The Cellular HAL libraries expose the capability of a few popular cellular modems through a uniform API.  
+The demos in this project demonstrate how to establish mutually authenticated MQTT connections to MQTT brokers, such as AWS IoT Core, by using cellular connectivity.  The demos use the [FreeRTOS Cellular Library](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Library/raw/main/doc/document/cellular.zip) sub-moduled from an external project.  The FreeRTOS Cellular Library exposes the capability of a few popular cellular modems through a uniform API.
 
 1. Quectel BG96
 2. Sierra Wireless HL7802
 3. U-Blox Sara-R4
 
-The MQTT and HTTP libraries of FreeRTOS use an abstract [Transport Interface](https://github.com/FreeRTOS/coreMQTT/blob/main/source/interface/transport_interface.h) to send/receive data in a generic way.  The demos in this project offer a [implementation](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/blob/master/source/coreMQTT/using_mbedtls.c) of the Transport Interface on top of the uniform API exposed by the Cellular HAL libraries.  
+The MQTT and HTTP libraries of FreeRTOS use an abstract [Transport Interface](https://github.com/FreeRTOS/coreMQTT/blob/main/source/interface/transport_interface.h) to send/receive data in a generic way.  The demos in this project offer a [implementation](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/blob/master/source/coreMQTT/using_mbedtls.c) of the Transport Interface on top of the uniform API exposed by the FreeRTOS Cellular Library.
 
 ## Hardware Setup
 
@@ -44,14 +44,14 @@ Figure 1. Components and Interfaces</p>
 
 The other components shown as blue boxes and dotted lines are implemented by this project:
 
-1. The [Demo Application](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/blob/main/source).  It is largely the same as the [coreMQTT demo](https://github.com/FreeRTOS/FreeRTOS/tree/master/FreeRTOS-Plus/Demo/coreMQTT_Windows_Simulator/MQTT_Mutual_Auth), with added logic to set up cellular as the transport.  (The original coreMQTT demo was designed for Wi-Fi on FreeRTOS Windows Simulator.)  There is also a demo application that integrates [1nce Zero Touch Provisioning](https://1nce.com/en/help-center/tutorials-documentations/1nce-connectivity-suite/) with the Cellular HAL and coreMQTT for connecting to AWS IoT Core.
+1. The [Demo Application](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/blob/main/source).  It is largely the same as the [coreMQTT demo](https://github.com/FreeRTOS/FreeRTOS/tree/master/FreeRTOS-Plus/Demo/coreMQTT_Windows_Simulator/MQTT_Mutual_Auth), with added logic to set up cellular as the transport.  (The original coreMQTT demo was designed for Wi-Fi on FreeRTOS Windows Simulator.)  There is also a demo application that integrates [1nce Zero Touch Provisioning](https://1nce.com/en/help-center/tutorials-documentations/1nce-connectivity-suite/) with the FreeRTOS Cellular Library and coreMQTT for connecting to AWS IoT Core.
 2. The [Transport Interface](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/blob/main/source/coreMQTT/using_mbedtls.c) is needed by the MQTT library (sub-moduled from the [coreMQTT](https://github.com/freertos/coreMQTT) project) to send and receive packets.
 3. The[TLS porting interface](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/blob/main/source/mbedtls/mbedtls_freertos_port.c) is needed by the mbedTLS library to run on FreeRTOS.
-4. The [Comm Interface](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/blob/main/source/cellular/comm_if_windows.c) is used by the Cellular HAL libraries to communicate with the cellular modems over UART connections.
+4. The [Comm Interface](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/blob/main/source/cellular/comm_if_windows.c) is used by the FreeRTOS Cellular Library to communicate with the cellular modems over UART connections.
 
 ## Developer References and API Documents
 
-Please refer to [cellular HAL library API document.](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-HAL/raw/main/doc/document/cellular.zip)
+Please refer to [FreeRTOS Cellular Library API document](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Library/raw/main/doc/document/cellular.zip).
 
 
 ## Download the source code
@@ -91,7 +91,7 @@ There is also a demo for 1nce zero touch provisioning with BG96 modem:
 ./Lab-Project-FreeRTOS-Cellular-Demo
 ├── lib
 │   ├── backoff_algorithm ( submodule : backoffAlgorithm )
-│   ├── cellular ( submodule : Lab-Project-FreeRTOS-Cellular-HAL )
+│   ├── cellular ( submodule : Lab-Project-FreeRTOS-Cellular-Library )
 │   ├── coreMQTT ( submodule : coreMQTT )
 │   ├── FreeRTOS ( submodule : FreeRTOS-Kernel )
 │   └── ThirdParty
@@ -103,7 +103,7 @@ There is also a demo for 1nce zero touch provisioning with BG96 modem:
 │   └──  1nce_bg96_zero_touch_provisioning_demo ( demo project for 1nce zero touch provisioning with BG96 )
 └── source
     ├── cellular
-    │   └── ( code for adapting Cellular HAL libraries with this demo )
+    │   └── ( code for adapting FreeRTOS Cellular Library with this demo )
     ├── coreMQTT
     │   └── ( code for adapting coreMQTT with this demo )
     ├── FreeRTOS

@@ -36,7 +36,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-/* Cellular HAL include. */
+/* FreeRTOS Cellular Library include. */
 #include "cellular_config.h"
 #include "cellular_config_defaults.h"
 #include "cellular_types.h"
