@@ -240,6 +240,6 @@
 /**
  * @brief Size of the range request from 1nce onboarding service.
  */
-#define democonfigRANGE_SIZE       ( 1000U )
+#define democonfigRANGE_SIZE                ( 1000U )
 
 #endif /* DEMO_CONFIG_H */
