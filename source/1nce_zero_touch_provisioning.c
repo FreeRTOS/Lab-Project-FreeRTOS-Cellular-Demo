@@ -183,9 +183,9 @@ static TlsTransportStatus_t nce_connect( NetworkContext_t * pxNetworkContext );
  *
  * @param[in] status: The status of previous operations.
  *
- * @param[in] status: The status of previous operations.
- *
  * @param[in] pxNetworkContext The parameter network context.
+ *
+ * @param[in] completeResponse: A buffer to collect complete onboarding response.
  *
  *
  * @return The status of the onboarding request.
@@ -450,6 +450,7 @@ static uint8_t nceReinitConnParams( char * completeResponse,
         return status;
     }
 
+    /* In the token we have now "ICCID" so we add 1 to start from the first number of ICCID */
     memcpy( nceThingName, token + 1, strSize );
     LogDebug( ( "Thing name is: %s.", nceThingName ) );
 
@@ -649,9 +650,14 @@ char * str_replace( char * orig,
                          &rangeEnd,
                          &rangeOriginalSize ) )
         {
+            LogDebug( ( "The size of the onboarding response is: %d\r\n",
+                        rangeOriginalSize ) );
+            return rangeOriginalSize;
         }
-
-        return rangeOriginalSize;
+        else
+        {
+            return EXIT_FAILURE;
+        }
     }
 /*-----------------------------------------------------------*/
 
@@ -697,6 +703,12 @@ char * str_replace( char * orig,
             if( rangeEnd == democonfigRANGE_SIZE )
             {
                 rangeOriginalSize = response_length( PART );
+
+                if( rangeOriginalSize == EXIT_FAILURE )
+                {
+                    LogError( ( "Failed to get complete onboarding response size." ) );
+                    return status;
+                }
             }
 
             if( recvBytes < 0 )
