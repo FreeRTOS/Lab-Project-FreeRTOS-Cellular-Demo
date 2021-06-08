@@ -165,6 +165,36 @@ static char PART[ RECV_BUFFER_LEN ];
  */
 static TlsTransportStatus_t nce_connect( NetworkContext_t * pxNetworkContext );
 
+/*-----------------------------------------------------------*/
+#ifdef democonfigRANGE_SIZE
+
+/**
+ * @brief The total byte length of the original response.
+ *
+ * @param[in] PART: A buffer to save received data (response header).
+ *
+ * @return the total byte of the original response.
+ */
+
+    static int response_length( static char * PART );
+
+/**
+ * @brief request the onboarding service with a range defined in demo_config.
+ *
+ * @param[in] status: The status of previous operations.
+ *
+ * @param[in] pxNetworkContext The parameter network context.
+ *
+ * @param[in] completeResponse: A buffer to collect complete onboarding response.
+ *
+ *
+ * @return The status of the onboarding request.
+ */
+    static uint8_t onboarding_request( uint8_t status,
+                                       NetworkContext_t * pxNetworkContext,
+                                       char ** completeResponse );
+#endif
+
 /**
  * @brief re-initialize MQTT connection information
  * from received onboarding response.
@@ -220,51 +250,41 @@ uint8_t nce_onboard( char ** pThingName,
     }
 
     /* Build onboarding request. */
-    char packetToSent[ 100 ];
+    #ifdef democonfigRANGE_SIZE
+        status = onboarding_request( status, &xNetworkContext, &completeResponse );
 
-    memset( packetToSent, '\0', 100 * sizeof( char ) );
-    sprintf( packetToSent, "GET /device-api/onboarding HTTP/1.1\r\n"
-                           "Host: %s\r\n"
-                           "Accept: text/csv\r\n\r\n", ONBOARDING_ENDPOINT );
-    LogInfo( ( "Send onboarding request:\r\n%.*s",
-               strlen( packetToSent ),
-               packetToSent ) );
+        if( status == EXIT_FAILURE )
+        {
+            return status;
+        }
+    #else
+        char packetToSent[ 100 ];
 
-    /* Send onboarding request. */
-    int32_t sentBytes = TLS_FreeRTOS_send( &xNetworkContext,
-                                           &packetToSent,
-                                           strlen( packetToSent ) );
+        memset( packetToSent, '\0', 100 * sizeof( char ) );
+        sprintf( packetToSent, "GET /device-api/onboarding HTTP/1.1\r\n"
+                               "Host: %s\r\n"
+                               "Accept: text/csv\r\n\r\n", ONBOARDING_ENDPOINT );
+        LogInfo( ( "Send onboarding request:\r\n%.*s",
+                   strlen( packetToSent ),
+                   packetToSent ) );
 
-    configASSERT( sentBytes > 0 );
+        /* Send onboarding request. */
+        int32_t sentBytes = TLS_FreeRTOS_send( &xNetworkContext,
+                                               &packetToSent,
+                                               strlen( packetToSent ) );
 
-    if( sentBytes <= 0 )
-    {
-        LogError( ( "Failed to send onboarding request." ) );
-        return status;
-    }
+        configASSERT( sentBytes > 0 );
 
-    /* Receive onboarding response. */
-    int32_t recvBytes = TLS_FreeRTOS_recv( &xNetworkContext,
-                                           &PART[ 0 ],
-                                           RECV_BUFFER_LEN );
+        if( sentBytes <= 0 )
+        {
+            LogError( ( "Failed to send onboarding request." ) );
+            return status;
+        }
 
-    if( recvBytes < 0 )
-    {
-        LogError( ( "Failed to receive onboarding response." ) );
-        return status;
-    }
-
-    LogDebug( ( "Received raw response: %d bytes.", recvBytes ) );
-    LogDebug( ( "\r\n%.*s", recvBytes, PART ) );
-    strcat( completeResponse,
-            strstr( PART, "Express\r\n\r\n\"" ) + strlen( "Express\r\n\r\n\"" ) );
-    memset( PART, ( int8_t ) '\0', sizeof( PART ) );
-
-    while( recvBytes == RECV_BUFFER_LEN )
-    {
-        recvBytes = TLS_FreeRTOS_recv( &xNetworkContext,
-                                       &PART[ 0 ],
-                                       RECV_BUFFER_LEN );
+        /* Receive onboarding response. */
+        int32_t recvBytes = TLS_FreeRTOS_recv( &xNetworkContext,
+                                               &PART[ 0 ],
+                                               RECV_BUFFER_LEN );
 
         if( recvBytes < 0 )
         {
@@ -272,11 +292,30 @@ uint8_t nce_onboard( char ** pThingName,
             return status;
         }
 
-        LogDebug( ( "Received raw response: %d bytes.", strlen( PART ) ) );
-        LogDebug( ( "\r\n%.*s", strlen( PART ), PART ) );
-        strcat( completeResponse, PART );
+        LogDebug( ( "Received raw response: %d bytes.", recvBytes ) );
+        LogDebug( ( "\r\n%.*s", recvBytes, PART ) );
+        strcat( completeResponse,
+                strstr( PART, "Express\r\n\r\n" ) + strlen( "Express\r\n\r\n" ) );
         memset( PART, ( int8_t ) '\0', sizeof( PART ) );
-    }
+
+        while( recvBytes == RECV_BUFFER_LEN )
+        {
+            recvBytes = TLS_FreeRTOS_recv( &xNetworkContext,
+                                           &PART[ 0 ],
+                                           RECV_BUFFER_LEN );
+
+            if( recvBytes < 0 )
+            {
+                LogError( ( "Failed to receive onboarding response." ) );
+                return status;
+            }
+
+            LogDebug( ( "Received raw response: %d bytes.", strlen( PART ) ) );
+            LogDebug( ( "\r\n%.*s", strlen( PART ), PART ) );
+            strcat( completeResponse, PART );
+            memset( PART, ( int8_t ) '\0', sizeof( PART ) );
+        }
+    #endif /* ifdef democonfigRANGE_SIZE */
 
     LogInfo( ( " Onboarding response is received." ) );
 
@@ -411,7 +450,8 @@ static uint8_t nceReinitConnParams( char * completeResponse,
         return status;
     }
 
-    memcpy( nceThingName, token, strSize );
+    /* In the token we have now "ICCID" so we add 1 to start from the first number of ICCID */
+    memcpy( nceThingName, token + 1, strSize );
     LogDebug( ( "Thing name is: %s.", nceThingName ) );
 
     /* Walk through other tokens. */
@@ -596,5 +636,117 @@ char * str_replace( char * orig,
     strcpy( tmp, orig );
     return result;
 }
+/*-----------------------------------------------------------*/
+#ifdef democonfigRANGE_SIZE
+    static int response_length( char * PART )
+    {
+        int pch = strstr( PART, "bytes" );
 
+        int rangeStart, rangeEnd, rangeOriginalSize;
+
+        if( 3 == sscanf( pch,
+                         "%*[^0123456789]%d%*[^0123456789]%d%*[^0123456789]%d",
+                         &rangeStart,
+                         &rangeEnd,
+                         &rangeOriginalSize ) )
+        {
+            LogDebug( ( "The size of the onboarding response is: %d\r\n",
+                        rangeOriginalSize ) );
+            return rangeOriginalSize;
+        }
+        else
+        {
+            return EXIT_FAILURE;
+        }
+    }
+/*-----------------------------------------------------------*/
+
+    static uint8_t onboarding_request( uint8_t status,
+                                       NetworkContext_t * pxNetworkContext,
+                                       char ** completeResponse )
+    {
+        char packetToSent[ 130 ];
+        int rangeStart = 0;
+        int rangeEnd = democonfigRANGE_SIZE;
+        int rangeOriginalSize;
+
+        memset( packetToSent, '\0', 130 * sizeof( char ) );
+
+        do
+        {
+            sprintf( packetToSent, "GET /device-api/onboarding HTTP/1.1\r\n"
+                                   "Host: %s\r\n"
+                                   "Range: bytes=%d-%d\r\n"
+                                   "Accept: text/csv\r\n\r\n", ONBOARDING_ENDPOINT, rangeStart, rangeEnd );
+            LogInfo( ( "Send onboarding request:\r\n%.*s",
+                       strlen( packetToSent ),
+                       packetToSent ) );
+
+            /* Send onboarding request. */
+            int32_t sentBytes = TLS_FreeRTOS_send( &xNetworkContext,
+                                                   &packetToSent,
+                                                   strlen( packetToSent ) );
+
+            configASSERT( sentBytes > 0 );
+
+            if( sentBytes <= 0 )
+            {
+                LogError( ( "Failed to send onboarding request." ) );
+                return status;
+            }
+
+            /* Receive onboarding response. */
+            int32_t recvBytes = TLS_FreeRTOS_recv( &xNetworkContext,
+                                                   &PART[ 0 ],
+                                                   RECV_BUFFER_LEN );
+
+            if( rangeEnd == democonfigRANGE_SIZE )
+            {
+                rangeOriginalSize = response_length( PART );
+
+                if( rangeOriginalSize == EXIT_FAILURE )
+                {
+                    LogError( ( "Failed to get complete onboarding response size." ) );
+                    return status;
+                }
+            }
+
+            if( recvBytes < 0 )
+            {
+                LogError( ( "Failed to receive onboarding response." ) );
+                return status;
+            }
+
+            LogDebug( ( "Received raw response: %d bytes.", recvBytes ) );
+            LogDebug( ( "\r\n%.*s", recvBytes, PART ) );
+            strcat( completeResponse,
+                    strstr( PART, "Express\r\n\r\n" ) + strlen( "Express\r\n\r\n" ) );
+            memset( PART, ( int8_t ) '\0', sizeof( PART ) );
+
+            while( recvBytes == RECV_BUFFER_LEN )
+            {
+                recvBytes = TLS_FreeRTOS_recv( &xNetworkContext,
+                                               &PART[ 0 ],
+                                               RECV_BUFFER_LEN );
+
+                if( recvBytes < 0 )
+                {
+                    LogError( ( "Failed to receive onboarding response." ) );
+                    return status;
+                }
+
+                LogDebug( ( "Received raw response: %d bytes.", strlen( PART ) ) );
+                LogDebug( ( "\r\n%.*s", strlen( PART ), PART ) );
+                strcat( completeResponse, PART );
+                memset( PART, ( int8_t ) '\0', sizeof( PART ) );
+            }
+
+            rangeStart = rangeEnd + 1;
+            rangeEnd += democonfigRANGE_SIZE;
+        } while( rangeStart < rangeOriginalSize );
+
+        status = EXIT_SUCCESS;
+        return status;
+    }
+#endif /* ifdef democonfigRANGE_SIZE */
 /*-----------------------------------------------------------*/
