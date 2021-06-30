@@ -6,7 +6,7 @@ FreeRTOS offers a suite of networking stacks designed for IoT applications.  App
 
 The demos in this project demonstrate how to establish mutually authenticated MQTT connections to MQTT brokers, such as AWS IoT Core, by using cellular connectivity.  The demos use the [Cellular Library](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Library/raw/main/doc/document/cellular.zip) sub-moduled from an external project. The FreeRTOS Cellular Library exposes the capability of a few popular cellular modems through a uniform API.
 
-1. [Quectel BG96](https://www.quectel.com/product/bg96.htm)
+1. [Quectel BG96](https://www.quectel.com/product/lte-bg96-cat-m1-nb1-egprs/)
 2. [Sierra Wireless HL7802](https://www.sierrawireless.com/products-and-solutions/embedded-solutions/products/hl7802/)
 3. [U-Blox Sara-R4](https://www.u-blox.com/en/product/sara-r4-series)
 
