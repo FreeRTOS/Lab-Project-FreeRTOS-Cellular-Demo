@@ -9,6 +9,7 @@ The demos in this project demonstrate how to establish mutually authenticated MQ
 1. [Quectel BG96](https://www.quectel.com/product/lte-bg96-cat-m1-nb1-egprs/)
 2. [Sierra Wireless HL7802](https://www.sierrawireless.com/products-and-solutions/embedded-solutions/products/hl7802/)
 3. [U-Blox Sara-R4](https://www.u-blox.com/en/product/sara-r4-series)
+4. [SIMCOM SIM7080](https://cn.simcom.com/product/SIM7080G.html)
 
 The MQTT and HTTP libraries of FreeRTOS use an abstract [Transport Interface](https://github.com/FreeRTOS/coreMQTT/blob/main/source/interface/transport_interface.h) to send/receive data in a generic way.  The demos in this project offer a [implementation](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/blob/master/source/coreMQTT/using_mbedtls.c) of the Transport Interface on top of the uniform API exposed by the FreeRTOS Cellular Library.
 
@@ -83,6 +84,7 @@ The demo project files for Visual Studio are named *xyz*_mqtt_mutual_auth_demo.s
 * [projects/bg96_mqtt_mutual_auth_demo](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/tree/master/projects/bg96_mqtt_mutual_auth_demo)
 * [projects/hl7802_mqtt_mutual_auth_demo](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/tree/master/projects/hl7802_mqtt_mutual_auth_demo)
 * [projects/sara_r4_mqtt_mutual_auth_demo](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/tree/master/projects/sara_r4_mqtt_mutual_auth_demo)
+* [projects/sim70x0_mqtt_mutual_auth_demo](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/tree/master/projects/sim70x0_mqtt_mutual_auth_demo)
 
 There is also a demo for 1nce zero touch provisioning with BG96 modem:
 
@@ -101,6 +103,7 @@ There is also a demo for 1nce zero touch provisioning with BG96 modem:
 │   ├──  bg96_mqtt_mutual_auth_demo ( demo project for Quectel BG96 )
 │   ├──  hl7802_mqtt_mutual_auth_demo ( demo project for Sierra Wireless HL7802 )
 │   ├──  sara_r4_mqtt_mutual_auth_demo ( demo project for U-Blox Sara-R4 )
+│   ├──  sim70x0_mqtt_mutual_auth_demo ( demo project for SIMCOM sim7080/sim7090 )
 │   └──  1nce_bg96_zero_touch_provisioning_demo ( demo project for 1nce zero touch provisioning with BG96 )
 └── source
     ├── cellular
