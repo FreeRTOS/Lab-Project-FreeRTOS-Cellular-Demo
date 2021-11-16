@@ -6,10 +6,8 @@ FreeRTOS offers a suite of networking stacks designed for IoT applications.  App
 
 The demos in this project demonstrate how to establish mutually authenticated MQTT connections to MQTT brokers, such as AWS IoT Core, by using cellular connectivity.  The demos use the [Cellular Library](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Library/raw/main/doc/document/cellular.zip) sub-moduled from an external project. The FreeRTOS Cellular Library exposes the capability of a few popular cellular modems through a uniform API.
 
-1. [Quectel BG96](https://www.quectel.com/product/lte-bg96-cat-m1-nb1-egprs/)
-2. [Sierra Wireless HL7802](https://www.sierrawireless.com/products-and-solutions/embedded-solutions/products/hl7802/)
-3. [U-Blox Sara-R4](https://www.u-blox.com/en/product/sara-r4-series)
-4. [SIMCOM SIM7080](https://cn.simcom.com/product/SIM7080G.html)
+1. [1nce Zero Touch Provisioning](https://1nce.com/en/help-center/tutorials-documentations/1nce-connectivity-suite/)
+1. [SIMCOM SIM7080](https://cn.simcom.com/product/SIM7080G.html)
 
 The MQTT and HTTP libraries of FreeRTOS use an abstract [Transport Interface](https://github.com/FreeRTOS/coreMQTT/blob/main/source/interface/transport_interface.h) to send/receive data in a generic way.  The demos in this project offer a [implementation](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/blob/master/source/coreMQTT/using_mbedtls.c) of the Transport Interface on top of the uniform API exposed by the FreeRTOS Cellular Library.
 
@@ -81,9 +79,6 @@ git submodule update --init --recursive
 
 The demo project files for Visual Studio are named *xyz*_mqtt_mutual_auth_demo.sln, where *xyz *is the name of the cellular modem.  They can be found on [Github](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/tree/main/projects) in the following directory:
 
-* [projects/bg96_mqtt_mutual_auth_demo](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/tree/master/projects/bg96_mqtt_mutual_auth_demo)
-* [projects/hl7802_mqtt_mutual_auth_demo](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/tree/master/projects/hl7802_mqtt_mutual_auth_demo)
-* [projects/sara_r4_mqtt_mutual_auth_demo](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/tree/master/projects/sara_r4_mqtt_mutual_auth_demo)
 * [projects/sim70x0_mqtt_mutual_auth_demo](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/tree/master/projects/sim70x0_mqtt_mutual_auth_demo)
 
 There is also a demo for 1nce zero touch provisioning with BG96 modem:
@@ -100,9 +95,6 @@ There is also a demo for 1nce zero touch provisioning with BG96 modem:
 │   └── ThirdParty
 │       └── mbedtls ( submodule : mbedtls )
 ├── projects
-│   ├──  bg96_mqtt_mutual_auth_demo ( demo project for Quectel BG96 )
-│   ├──  hl7802_mqtt_mutual_auth_demo ( demo project for Sierra Wireless HL7802 )
-│   ├──  sara_r4_mqtt_mutual_auth_demo ( demo project for U-Blox Sara-R4 )
 │   ├──  sim70x0_mqtt_mutual_auth_demo ( demo project for SIMCOM sim7080/sim7090 )
 │   └──  1nce_bg96_zero_touch_provisioning_demo ( demo project for 1nce zero touch provisioning with BG96 )
 └── source
@@ -138,11 +130,6 @@ The following parameters in the cellular configuration, [cellular_config.h](http
 | CELLULAR_APN                 | Default APN for network registration. | Specify the value according to your network operator. |
 | CELLULAR_PDN_CONTEXT_ID      | PDN context id for cellular network. | Default value is CELLULAR_PDN_CONTEXT_ID_MIN. |
 | CELLULAR_PDN_CONNECT_TIMEOUT | PDN connect timeout for network registration. | Default value is 100000 milliseconds. |
-
-Note
-
-> The U-Blox SARA-R4 series support setting mobile network operators.
-Set **CELLULAR_CONFIG_SARA_R4_SET_MNO_PROFILE **in [cellular_config.h](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/blob/main/source/cellular/sara_r4/cellular_config.h) according to your mobile network operator.
 
 
 

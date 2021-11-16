@@ -84,42 +84,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\lib\cellular\common\include\cellular_common.h">
-      <Filter>lib\cellular\common\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\cellular\common\include\cellular_common_api.h">
-      <Filter>lib\cellular\common\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\cellular\common\include\cellular_common_portable.h">
-      <Filter>lib\cellular\common\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\cellular\common\include\cellular_at_core.h">
-      <Filter>lib\cellular\common\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\cellular\common\include\private\cellular_internal.h">
-      <Filter>lib\cellular\common\include\private</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\cellular\common\include\private\cellular_pkthandler_internal.h">
-      <Filter>lib\cellular\common\include\private</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\cellular\common\include\private\cellular_pktio_internal.h">
-      <Filter>lib\cellular\common\include\private</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\cellular\common\include\private\cellular_common_internal.h">
-      <Filter>lib\cellular\common\include\private</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\cellular\include\cellular_comm_interface.h">
-      <Filter>lib\cellular\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\cellular\include\cellular_config_defaults.h">
-      <Filter>lib\cellular\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\cellular\include\cellular_types.h">
-      <Filter>lib\cellular\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\cellular\include\cellular_api.h">
-      <Filter>lib\cellular\include</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\lib\cellular\modules\bg96\cellular_bg96.h">
       <Filter>lib\cellular\modules\bg96</Filter>
     </ClInclude>
@@ -471,29 +435,44 @@
     <ClInclude Include="..\..\lib\ThirdParty\mbedtls\library\ssl_invasive.h">
       <Filter>lib\ThirdParty\mbedtls\library</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\lib\cellular\source\include\private\cellular_common_internal.h">
+      <Filter>lib\cellular\common\include\private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\cellular\source\include\private\cellular_pkthandler_internal.h">
+      <Filter>lib\cellular\common\include\private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\cellular\source\include\private\cellular_pktio_internal.h">
+      <Filter>lib\cellular\common\include\private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\cellular\source\include\private\cellular_internal.h">
+      <Filter>lib\cellular\common\include\private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\cellular\source\include\common\cellular_at_core.h">
+      <Filter>lib\cellular\common\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\cellular\source\include\common\cellular_common.h">
+      <Filter>lib\cellular\common\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\cellular\source\include\common\cellular_common_api.h">
+      <Filter>lib\cellular\common\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\cellular\source\include\common\cellular_common_portable.h">
+      <Filter>lib\cellular\common\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\cellular\source\include\cellular_api.h">
+      <Filter>lib\cellular\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\cellular\source\include\cellular_config_defaults.h">
+      <Filter>lib\cellular\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\cellular\source\include\cellular_types.h">
+      <Filter>lib\cellular\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\cellular\source\interface\cellular_comm_interface.h">
+      <Filter>lib\cellular\include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\lib\cellular\common\src\cellular_common.c">
-      <Filter>lib\cellular\common\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\cellular\common\src\cellular_common_api.c">
-      <Filter>lib\cellular\common\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\cellular\common\src\cellular_pkthandler.c">
-      <Filter>lib\cellular\common\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\cellular\common\src\cellular_pktio.c">
-      <Filter>lib\cellular\common\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\cellular\common\src\cellular_3gpp_api.c">
-      <Filter>lib\cellular\common\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\cellular\common\src\cellular_3gpp_urc_handler.c">
-      <Filter>lib\cellular\common\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\cellular\common\src\cellular_at_core.c">
-      <Filter>lib\cellular\common\src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\lib\cellular\modules\bg96\cellular_bg96_api.c">
       <Filter>lib\cellular\modules\bg96</Filter>
     </ClCompile>
@@ -823,6 +802,27 @@
     </ClCompile>
     <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\xtea.c">
       <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\cellular\source\cellular_3gpp_api.c">
+      <Filter>lib\cellular\common\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\cellular\source\cellular_3gpp_urc_handler.c">
+      <Filter>lib\cellular\common\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\cellular\source\cellular_at_core.c">
+      <Filter>lib\cellular\common\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\cellular\source\cellular_common.c">
+      <Filter>lib\cellular\common\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\cellular\source\cellular_common_api.c">
+      <Filter>lib\cellular\common\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\cellular\source\cellular_pkthandler.c">
+      <Filter>lib\cellular\common\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\cellular\source\cellular_pktio.c">
+      <Filter>lib\cellular\common\src</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

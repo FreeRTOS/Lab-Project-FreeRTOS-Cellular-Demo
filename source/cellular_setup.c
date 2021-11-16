@@ -142,8 +142,8 @@ bool setupCellular( void )
             cellularStatus = Cellular_GetServiceStatus( CellularHandle, &serviceStatus );
 
             if( ( cellularStatus == CELLULAR_SUCCESS ) &&
-                ( ( serviceStatus.psRegistrationStatus == CELLULAR_NETWORK_REGISTRATION_STATUS_REGISTERED_HOME ) ||
-                  ( serviceStatus.psRegistrationStatus == CELLULAR_NETWORK_REGISTRATION_STATUS_REGISTERED_ROAMING ) ) )
+                ( ( serviceStatus.psRegistrationStatus == REGISTRATION_STATUS_REGISTERED_HOME) ||
+                  ( serviceStatus.psRegistrationStatus == REGISTRATION_STATUS_ROAMING_REGISTERED) ) )
             {
                 configPRINTF( ( ">>>  Cellular module registered  <<<\r\n" ) );
                 break;
