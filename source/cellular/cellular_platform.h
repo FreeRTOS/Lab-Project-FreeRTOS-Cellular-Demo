@@ -138,6 +138,8 @@ void PlatformMutex_Unlock( PlatformMutex_t * pMutex );
 #define PlatformEventGroup_SetBits           xEventGroupSetBits
 #define PlatformEventGroup_SetBitsFromISR    xEventGroupSetBitsFromISR
 #define PlatformEventGroup_WaitBits          xEventGroupWaitBits
+#define PlatformEventGroup_EventBits         EventBits_t
+#define PlatformTickType                     TickType_t
 
 /*-----------------------------------------------------------*/
 
