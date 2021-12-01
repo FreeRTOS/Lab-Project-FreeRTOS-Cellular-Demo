@@ -12,19 +12,19 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\lib\backoff_algorithm\source\include\backoff_algorithm.h" />
-    <ClInclude Include="..\..\lib\cellular\common\include\cellular_at_core.h" />
-    <ClInclude Include="..\..\lib\cellular\common\include\cellular_common.h" />
-    <ClInclude Include="..\..\lib\cellular\common\include\cellular_common_api.h" />
-    <ClInclude Include="..\..\lib\cellular\common\include\cellular_common_portable.h" />
-    <ClInclude Include="..\..\lib\cellular\common\include\private\cellular_common_internal.h" />
-    <ClInclude Include="..\..\lib\cellular\common\include\private\cellular_internal.h" />
-    <ClInclude Include="..\..\lib\cellular\common\include\private\cellular_pkthandler_internal.h" />
-    <ClInclude Include="..\..\lib\cellular\common\include\private\cellular_pktio_internal.h" />
-    <ClInclude Include="..\..\lib\cellular\include\cellular_api.h" />
-    <ClInclude Include="..\..\lib\cellular\include\cellular_comm_interface.h" />
-    <ClInclude Include="..\..\lib\cellular\include\cellular_config_defaults.h" />
-    <ClInclude Include="..\..\lib\cellular\include\cellular_types.h" />
     <ClInclude Include="..\..\lib\cellular\modules\bg96\cellular_bg96.h" />
+    <ClInclude Include="..\..\lib\cellular\source\include\cellular_api.h" />
+    <ClInclude Include="..\..\lib\cellular\source\include\cellular_config_defaults.h" />
+    <ClInclude Include="..\..\lib\cellular\source\include\cellular_types.h" />
+    <ClInclude Include="..\..\lib\cellular\source\include\common\cellular_at_core.h" />
+    <ClInclude Include="..\..\lib\cellular\source\include\common\cellular_common.h" />
+    <ClInclude Include="..\..\lib\cellular\source\include\common\cellular_common_api.h" />
+    <ClInclude Include="..\..\lib\cellular\source\include\common\cellular_common_portable.h" />
+    <ClInclude Include="..\..\lib\cellular\source\include\private\cellular_common_internal.h" />
+    <ClInclude Include="..\..\lib\cellular\source\include\private\cellular_internal.h" />
+    <ClInclude Include="..\..\lib\cellular\source\include\private\cellular_pkthandler_internal.h" />
+    <ClInclude Include="..\..\lib\cellular\source\include\private\cellular_pktio_internal.h" />
+    <ClInclude Include="..\..\lib\cellular\source\interface\cellular_comm_interface.h" />
     <ClInclude Include="..\..\lib\coreMQTT\source\include\core_mqtt.h" />
     <ClInclude Include="..\..\lib\coreMQTT\source\include\core_mqtt_config_defaults.h" />
     <ClInclude Include="..\..\lib\coreMQTT\source\include\core_mqtt_serializer.h" />
@@ -143,17 +143,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\lib\backoff_algorithm\source\backoff_algorithm.c" />
-    <ClCompile Include="..\..\lib\cellular\common\src\cellular_3gpp_api.c" />
-    <ClCompile Include="..\..\lib\cellular\common\src\cellular_3gpp_urc_handler.c" />
-    <ClCompile Include="..\..\lib\cellular\common\src\cellular_at_core.c" />
-    <ClCompile Include="..\..\lib\cellular\common\src\cellular_common.c" />
-    <ClCompile Include="..\..\lib\cellular\common\src\cellular_common_api.c" />
-    <ClCompile Include="..\..\lib\cellular\common\src\cellular_pkthandler.c" />
-    <ClCompile Include="..\..\lib\cellular\common\src\cellular_pktio.c" />
     <ClCompile Include="..\..\lib\cellular\modules\bg96\cellular_bg96.c" />
     <ClCompile Include="..\..\lib\cellular\modules\bg96\cellular_bg96_api.c" />
     <ClCompile Include="..\..\lib\cellular\modules\bg96\cellular_bg96_urc_handler.c" />
     <ClCompile Include="..\..\lib\cellular\modules\bg96\cellular_bg96_wrapper.c" />
+    <ClCompile Include="..\..\lib\cellular\source\cellular_3gpp_api.c" />
+    <ClCompile Include="..\..\lib\cellular\source\cellular_3gpp_urc_handler.c" />
+    <ClCompile Include="..\..\lib\cellular\source\cellular_at_core.c" />
+    <ClCompile Include="..\..\lib\cellular\source\cellular_common.c" />
+    <ClCompile Include="..\..\lib\cellular\source\cellular_common_api.c" />
+    <ClCompile Include="..\..\lib\cellular\source\cellular_pkthandler.c" />
+    <ClCompile Include="..\..\lib\cellular\source\cellular_pktio.c" />
     <ClCompile Include="..\..\lib\coreMQTT\source\core_mqtt.c" />
     <ClCompile Include="..\..\lib\coreMQTT\source\core_mqtt_serializer.c" />
     <ClCompile Include="..\..\lib\coreMQTT\source\core_mqtt_state.c" />
@@ -308,7 +308,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>.\..\..\lib\cellular\include;.\..\..\lib\cellular\common\include;.\..\..\lib\cellular\common\include\private;.\..\..\lib\FreeRTOS\portable\MSVC-MingW;.\..\..\lib\FreeRTOS\include;.\..\..\lib\coreMQTT\source\portable;.\..\..\lib\coreMQTT\source\include;.\..\..\lib\coreMQTT\source\interface;.\..\..\lib\ThirdParty\mbedtls\include;.\..\..\lib\backoff_algorithm\source\include;.\..\..\source;.\..\..\source\coreMQTT;.\..\..\source\FreeRTOS;.\..\..\source\mbedtls;.\..\..\source\cellular;.\..\..\source\cellular\bg96;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\..\..\lib\cellular\source\include;.\..\..\lib\cellular\source\interface;.\..\..\lib\cellular\source\include\common;.\..\..\lib\cellular\source\include\private;.\..\..\lib\FreeRTOS\portable\MSVC-MingW;.\..\..\lib\FreeRTOS\include;.\..\..\lib\coreMQTT\source\portable;.\..\..\lib\coreMQTT\source\include;.\..\..\lib\coreMQTT\source\interface;.\..\..\lib\ThirdParty\mbedtls\include;.\..\..\lib\backoff_algorithm\source\include;.\..\..\source;.\..\..\source\coreMQTT;.\..\..\source\FreeRTOS;.\..\..\source\mbedtls;.\..\..\source\cellular;.\..\..\source\cellular\bg96;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>USE_1NCE_ZERO_TOUCH_PROVISIONING;MBEDTLS_CONFIG_FILE="mbedtls_config.h";WIN32;_DEBUG;_CONSOLE;_WIN32_WINNT=0x0500;WINVER=0x400;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
