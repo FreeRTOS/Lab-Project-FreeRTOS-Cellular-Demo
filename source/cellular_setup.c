@@ -54,6 +54,8 @@
 
 #define CELLULAR_PDN_CONNECT_WAIT_INTERVAL_MS    ( 1000UL )
 
+#define CELLULAR_PDN_CONTEXT_NUM                 ( CELLULAR_PDN_CONTEXT_ID_MAX - CELLULAR_PDN_CONTEXT_ID_MIN + 1U )
+
 /*-----------------------------------------------------------*/
 
 /* the default Cellular comm interface in system. */
@@ -79,16 +81,22 @@ bool setupCellular( void )
     CellularCommInterface_t * pCommIntf = &CellularCommInterface;
     uint8_t tries = 0;
     CellularPdnConfig_t pdnConfig = { CELLULAR_PDN_CONTEXT_IPV4, CELLULAR_PDN_AUTH_NONE, CELLULAR_APN, "", "" };
-    CellularPdnStatus_t PdnStatusBuffers = { 0 };
+    CellularPdnStatus_t PdnStatusBuffers[ CELLULAR_PDN_CONTEXT_NUM ] = { 0 };
     char localIP[ CELLULAR_IP_ADDRESS_MAX_SIZE ] = { '\0' };
     uint32_t timeoutCountLimit = ( CELLULAR_PDN_CONNECT_TIMEOUT / CELLULAR_PDN_CONNECT_WAIT_INTERVAL_MS ) + 1U;
     uint32_t timeoutCount = 0;
-    uint8_t NumStatus = 1;
+    uint8_t NumStatus = 0;
+    bool pdnStatus = false;
+    uint32_t i = 0U;
 
     /* Initialize Cellular Comm Interface. */
     cellularStatus = Cellular_Init( &CellularHandle, pCommIntf );
 
-    if( cellularStatus == CELLULAR_SUCCESS )
+    if( cellularStatus != CELLULAR_SUCCESS )
+    {
+        configPRINTF( ( ">>>  Cellular_Init failure %d  <<<\r\n", cellularStatus ) );
+    }
+    else
     {
         /* wait until SIM is ready */
         for( tries = 0; tries < CELLULAR_MAX_SIM_RETRY; tries++ )
@@ -111,27 +119,43 @@ bool setupCellular( void )
 
             vTaskDelay( pdMS_TO_TICKS( CELLULAR_SIM_CARD_WAIT_INTERVAL_MS ) );
         }
+
+        if( cellularStatus != CELLULAR_SUCCESS )
+        {
+            configPRINTF( ( ">>>  Cellular SIM failure  <<<\r\n" ) );
+        }
     }
 
     /* Setup the PDN config. */
     if( cellularStatus == CELLULAR_SUCCESS )
     {
         cellularStatus = Cellular_SetPdnConfig( CellularHandle, CellularSocketPdnContextId, &pdnConfig );
-    }
-    else
-    {
-        configPRINTF( ( ">>>  Cellular SIM failure  <<<\r\n" ) );
+
+        if( cellularStatus != CELLULAR_SUCCESS )
+        {
+            configPRINTF( ( ">>>  Cellular_SetPdnConfig failure %d  <<<\r\n", cellularStatus ) );
+        }
     }
 
     /* Rescan network. */
     if( cellularStatus == CELLULAR_SUCCESS )
     {
         cellularStatus = Cellular_RfOff( CellularHandle );
+
+        if( cellularStatus != CELLULAR_SUCCESS )
+        {
+            configPRINTF( ( ">>>  Cellular_RfOff failure %d  <<<\r\n", cellularStatus ) );
+        }
     }
 
     if( cellularStatus == CELLULAR_SUCCESS )
     {
         cellularStatus = Cellular_RfOn( CellularHandle );
+
+        if( cellularStatus != CELLULAR_SUCCESS )
+        {
+            configPRINTF( ( ">>>  Cellular_RfOn failure %d  <<<\r\n", cellularStatus ) );
+        }
     }
 
     /* Get service status. */
@@ -142,8 +166,8 @@ bool setupCellular( void )
             cellularStatus = Cellular_GetServiceStatus( CellularHandle, &serviceStatus );
 
             if( ( cellularStatus == CELLULAR_SUCCESS ) &&
-                ( ( serviceStatus.psRegistrationStatus == REGISTRATION_STATUS_REGISTERED_HOME) ||
-                  ( serviceStatus.psRegistrationStatus == REGISTRATION_STATUS_ROAMING_REGISTERED) ) )
+                ( ( serviceStatus.psRegistrationStatus == REGISTRATION_STATUS_REGISTERED_HOME ) ||
+                  ( serviceStatus.psRegistrationStatus == REGISTRATION_STATUS_ROAMING_REGISTERED ) ) )
             {
                 configPRINTF( ( ">>>  Cellular module registered  <<<\r\n" ) );
                 break;
@@ -168,19 +192,51 @@ bool setupCellular( void )
     if( cellularStatus == CELLULAR_SUCCESS )
     {
         cellularStatus = Cellular_ActivatePdn( CellularHandle, CellularSocketPdnContextId );
+
+        if( cellularStatus != CELLULAR_SUCCESS )
+        {
+            configPRINTF( ( ">>>  Cellular_ActivatePdn failure %d  <<<\r\n", cellularStatus ) );
+        }
     }
 
     if( cellularStatus == CELLULAR_SUCCESS )
     {
         cellularStatus = Cellular_GetIPAddress( CellularHandle, CellularSocketPdnContextId, localIP, sizeof( localIP ) );
+
+        if( cellularStatus != CELLULAR_SUCCESS )
+        {
+            configPRINTF( ( ">>>  Cellular_GetIPAddress failure %d  <<<\r\n", cellularStatus ) );
+        }
     }
 
     if( cellularStatus == CELLULAR_SUCCESS )
     {
-        cellularStatus = Cellular_GetPdnStatus( CellularHandle, &PdnStatusBuffers, CellularSocketPdnContextId, &NumStatus );
+        cellularStatus = Cellular_GetPdnStatus( CellularHandle, PdnStatusBuffers, CELLULAR_PDN_CONTEXT_NUM, &NumStatus );
+
+        if( cellularStatus != CELLULAR_SUCCESS )
+        {
+            configPRINTF( ( ">>>  Cellular_GetPdnStatus failure %d  <<<\r\n", cellularStatus ) );
+        }
     }
 
-    if( ( cellularStatus == CELLULAR_SUCCESS ) && ( PdnStatusBuffers.state == 1 ) )
+    if( cellularStatus == CELLULAR_SUCCESS )
+    {
+        for( i = 0U; i < NumStatus; i++ )
+        {
+            if( ( PdnStatusBuffers[ i ].contextId == CellularSocketPdnContextId ) && ( PdnStatusBuffers[ i ].state == 1 ) )
+            {
+                pdnStatus = true;
+                break;
+            }
+        }
+
+        if( pdnStatus == false )
+        {
+            configPRINTF( ( ">>>  Cellular PDN is not activated <<<" ) );
+        }
+    }
+
+    if( ( cellularStatus == CELLULAR_SUCCESS ) && ( pdnStatus == true ) )
     {
         configPRINTF( ( ">>>  Cellular module registered, IP address %s  <<<\r\n", localIP ) );
         cellularRet = true;

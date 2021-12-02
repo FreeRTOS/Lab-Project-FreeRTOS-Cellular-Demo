@@ -7,23 +7,8 @@
     <Filter Include="lib\cellular">
       <UniqueIdentifier>{6316d7af-fda2-4c3c-bed2-ecb027f2a5a8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="lib\cellular\common">
-      <UniqueIdentifier>{4a322054-df05-43c1-b65d-97d635f8b333}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="lib\cellular\include">
-      <UniqueIdentifier>{c9d6c832-bf55-409e-8d39-460d4a5cb62f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="lib\cellular\modules">
       <UniqueIdentifier>{ab3b24d4-df9b-45e0-8ecc-98915add026b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="lib\cellular\common\include">
-      <UniqueIdentifier>{250deeef-763c-4482-aee5-2c45b5a9acb3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="lib\cellular\common\include\private">
-      <UniqueIdentifier>{f8d27fee-6508-497d-a093-d56cdb319fb7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="lib\cellular\modules\sim70x0">
-      <UniqueIdentifier>{7e2feb1c-beb2-4434-a6e5-526ede1d33a1}</UniqueIdentifier>
     </Filter>
     <Filter Include="lib\coreMQTT">
       <UniqueIdentifier>{f95d7810-c685-4be6-ad6e-2cbcbe8f9198}</UniqueIdentifier>
@@ -33,9 +18,6 @@
     </Filter>
     <Filter Include="source">
       <UniqueIdentifier>{fdde7623-f419-457e-ad4b-7fce3c81dcf2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="lib\cellular\common\src">
-      <UniqueIdentifier>{937975ed-ae7e-4746-9647-6384c6ce47f6}</UniqueIdentifier>
     </Filter>
     <Filter Include="lib\coreMQTT\include">
       <UniqueIdentifier>{a5597651-6a1a-416e-89a9-6612aabb322a}</UniqueIdentifier>
@@ -82,47 +64,32 @@
     <Filter Include="lib\ThirdParty\mbedtls\library">
       <UniqueIdentifier>{7b15290b-08e6-4de0-80d5-74f9a0937200}</UniqueIdentifier>
     </Filter>
+    <Filter Include="lib\cellular\source">
+      <UniqueIdentifier>{55f59079-24ed-4e35-892b-4767fe17790f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\cellular\source\include">
+      <UniqueIdentifier>{af534b12-422c-4433-a1af-f8dd15e6d820}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\cellular\source\interface">
+      <UniqueIdentifier>{847196f4-20b2-4891-9776-64e2842487c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\cellular\source\include\common">
+      <UniqueIdentifier>{fbb3a328-39cd-438d-b19f-f61e9216f5bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\cellular\source\include\private">
+      <UniqueIdentifier>{9a77e3ed-0964-44bf-983b-d1b23695ba24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\cellular\modules\ThirdParty">
+      <UniqueIdentifier>{843a1003-9c9a-4d6c-8b4a-04171bc744ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\cellular\modules\ThirdParty\Community-Supported-Ports">
+      <UniqueIdentifier>{4e6dca04-dbf9-4b5c-9ab4-f15bd813921c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\cellular\modules\ThirdParty\Community-Supported-Ports\sim70x0">
+      <UniqueIdentifier>{15c7f3eb-ef5a-4634-8630-e5a551850834}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\lib\cellular\common\include\cellular_common.h">
-      <Filter>lib\cellular\common\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\cellular\common\include\cellular_common_api.h">
-      <Filter>lib\cellular\common\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\cellular\common\include\cellular_common_portable.h">
-      <Filter>lib\cellular\common\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\cellular\common\include\cellular_at_core.h">
-      <Filter>lib\cellular\common\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\cellular\common\include\private\cellular_internal.h">
-      <Filter>lib\cellular\common\include\private</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\cellular\common\include\private\cellular_pkthandler_internal.h">
-      <Filter>lib\cellular\common\include\private</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\cellular\common\include\private\cellular_pktio_internal.h">
-      <Filter>lib\cellular\common\include\private</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\cellular\common\include\private\cellular_common_internal.h">
-      <Filter>lib\cellular\common\include\private</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\cellular\include\cellular_comm_interface.h">
-      <Filter>lib\cellular\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\cellular\include\cellular_config_defaults.h">
-      <Filter>lib\cellular\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\cellular\include\cellular_types.h">
-      <Filter>lib\cellular\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\cellular\include\cellular_api.h">
-      <Filter>lib\cellular\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lib\cellular\modules\sim70x0\cellular_sim70x0.h">
-      <Filter>lib\cellular\modules\sim70x0</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\lib\coreMQTT\source\include\core_mqtt_config_defaults.h">
       <Filter>lib\coreMQTT\include</Filter>
     </ClInclude>
@@ -468,41 +435,47 @@
     <ClInclude Include="..\..\lib\ThirdParty\mbedtls\library\ssl_invasive.h">
       <Filter>lib\ThirdParty\mbedtls\library</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\lib\cellular\source\include\cellular_api.h">
+      <Filter>lib\cellular\source\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\cellular\source\include\cellular_config_defaults.h">
+      <Filter>lib\cellular\source\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\cellular\source\include\cellular_types.h">
+      <Filter>lib\cellular\source\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\cellular\source\include\common\cellular_at_core.h">
+      <Filter>lib\cellular\source\include\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\cellular\source\include\common\cellular_common.h">
+      <Filter>lib\cellular\source\include\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\cellular\source\include\common\cellular_common_api.h">
+      <Filter>lib\cellular\source\include\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\cellular\source\include\common\cellular_common_portable.h">
+      <Filter>lib\cellular\source\include\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\cellular\source\include\private\cellular_common_internal.h">
+      <Filter>lib\cellular\source\include\private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\cellular\source\include\private\cellular_internal.h">
+      <Filter>lib\cellular\source\include\private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\cellular\source\include\private\cellular_pkthandler_internal.h">
+      <Filter>lib\cellular\source\include\private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\cellular\source\include\private\cellular_pktio_internal.h">
+      <Filter>lib\cellular\source\include\private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\cellular\source\interface\cellular_comm_interface.h">
+      <Filter>lib\cellular\source\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\cellular\modules\ThirdParty\Community-Supported-Ports\sim70x0\cellular_sim70x0.h">
+      <Filter>lib\cellular\modules\ThirdParty\Community-Supported-Ports\sim70x0</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\lib\cellular\common\src\cellular_common.c">
-      <Filter>lib\cellular\common\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\cellular\common\src\cellular_common_api.c">
-      <Filter>lib\cellular\common\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\cellular\common\src\cellular_pkthandler.c">
-      <Filter>lib\cellular\common\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\cellular\common\src\cellular_pktio.c">
-      <Filter>lib\cellular\common\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\cellular\common\src\cellular_3gpp_api.c">
-      <Filter>lib\cellular\common\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\cellular\common\src\cellular_3gpp_urc_handler.c">
-      <Filter>lib\cellular\common\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\cellular\common\src\cellular_at_core.c">
-      <Filter>lib\cellular\common\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\cellular\modules\sim70x0\cellular_sim70x0_api.c">
-      <Filter>lib\cellular\modules\sim70x0</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\cellular\modules\sim70x0\cellular_sim70x0_urc_handler.c">
-      <Filter>lib\cellular\modules\sim70x0</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\cellular\modules\sim70x0\cellular_sim70x0_wrapper.c">
-      <Filter>lib\cellular\modules\sim70x0</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\cellular\modules\sim70x0\cellular_sim70x0.c">
-      <Filter>lib\cellular\modules\sim70x0</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\lib\coreMQTT\source\core_mqtt_serializer.c">
       <Filter>lib\coreMQTT\src</Filter>
     </ClCompile>
@@ -817,6 +790,39 @@
     </ClCompile>
     <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\xtea.c">
       <Filter>lib\ThirdParty\mbedtls\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\cellular\source\cellular_3gpp_api.c">
+      <Filter>lib\cellular\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\cellular\source\cellular_3gpp_urc_handler.c">
+      <Filter>lib\cellular\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\cellular\source\cellular_at_core.c">
+      <Filter>lib\cellular\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\cellular\source\cellular_common.c">
+      <Filter>lib\cellular\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\cellular\source\cellular_common_api.c">
+      <Filter>lib\cellular\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\cellular\source\cellular_pkthandler.c">
+      <Filter>lib\cellular\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\cellular\source\cellular_pktio.c">
+      <Filter>lib\cellular\source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\cellular\modules\ThirdParty\Community-Supported-Ports\sim70x0\cellular_sim70x0.c">
+      <Filter>lib\cellular\modules\ThirdParty\Community-Supported-Ports\sim70x0</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\cellular\modules\ThirdParty\Community-Supported-Ports\sim70x0\cellular_sim70x0_api.c">
+      <Filter>lib\cellular\modules\ThirdParty\Community-Supported-Ports\sim70x0</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\cellular\modules\ThirdParty\Community-Supported-Ports\sim70x0\cellular_sim70x0_urc_handler.c">
+      <Filter>lib\cellular\modules\ThirdParty\Community-Supported-Ports\sim70x0</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\cellular\modules\ThirdParty\Community-Supported-Ports\sim70x0\cellular_sim70x0_wrapper.c">
+      <Filter>lib\cellular\modules\ThirdParty\Community-Supported-Ports\sim70x0</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
