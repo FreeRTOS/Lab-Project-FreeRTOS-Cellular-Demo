@@ -189,6 +189,19 @@ bool setupCellular( void )
         }
     }
 
+    #ifdef CELLULAR_MODEM_NO_EPS_NETWORK
+        if( cellularStatus == CELLULAR_SUCCESS )
+        {
+            /*Quectel GSM Modules require starting the TCPIP task*/
+            cellularStatus = Cellular_StartTCPIP( CellularHandle );
+
+            if( cellularStatus != CELLULAR_SUCCESS )
+            {
+                configPRINTF( ( ">>>  Cellular_StartTCPIP failure %d  <<<\r\n", cellularStatus ) );
+            }
+        }
+    #endif /* ifdef CELLULAR_MODEM_NO_EPS_NETWORK */
+
     if( cellularStatus == CELLULAR_SUCCESS )
     {
         cellularStatus = Cellular_ActivatePdn( CellularHandle, CellularSocketPdnContextId );
@@ -209,6 +222,7 @@ bool setupCellular( void )
         }
     }
 
+    #ifndef CELLULAR_MODEM_NO_EPS_NETWORK
     if( cellularStatus == CELLULAR_SUCCESS )
     {
         cellularStatus = Cellular_GetPdnStatus( CellularHandle, PdnStatusBuffers, CELLULAR_PDN_CONTEXT_NUM, &NumStatus );
@@ -237,6 +251,9 @@ bool setupCellular( void )
     }
 
     if( ( cellularStatus == CELLULAR_SUCCESS ) && ( pdnStatus == true ) )
+    #else /* ifndef CELLULAR_MODEM_NO_EPS_NETWORK */
+    if (cellularStatus == CELLULAR_SUCCESS)
+    #endif /* ifdef CELLULAR_MODEM_NO_EPS_NETWORK */
     {
         configPRINTF( ( ">>>  Cellular module registered, IP address %s  <<<\r\n", localIP ) );
         cellularRet = true;
