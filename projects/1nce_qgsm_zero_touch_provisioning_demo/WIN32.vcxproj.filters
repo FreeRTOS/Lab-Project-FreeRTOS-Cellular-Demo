@@ -512,9 +512,6 @@
     <ClCompile Include="..\..\lib\FreeRTOS\portable\MemMang\heap_4.c">
       <Filter>lib\FreeRTOS\portable</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\cellular_setup.c">
-      <Filter>source</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\source\main.c">
       <Filter>source</Filter>
     </ClCompile>
@@ -829,6 +826,9 @@
     </ClCompile>
     <ClCompile Include="..\..\source\1nce_zero_touch_provisioning.c">
       <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\cellular\qgsm\cellular_setup_qgsm.c">
+      <Filter>source\cellular</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

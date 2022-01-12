@@ -252,7 +252,7 @@
     <ClCompile Include="..\..\source\1nce_zero_touch_provisioning.c" />
     <ClCompile Include="..\..\source\cellular\cellular_platform.c" />
     <ClCompile Include="..\..\source\cellular\comm_if_windows.c" />
-    <ClCompile Include="..\..\source\cellular_setup.c" />
+    <ClCompile Include="..\..\source\cellular\qgsm\cellular_setup_qgsm.c" />
     <ClCompile Include="..\..\source\coreMQTT\sockets_wrapper.c" />
     <ClCompile Include="..\..\source\coreMQTT\using_mbedtls.c" />
     <ClCompile Include="..\..\source\main.c" />

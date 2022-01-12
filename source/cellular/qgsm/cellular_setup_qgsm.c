@@ -24,8 +24,8 @@
  */
 
 /**
- * @file cellular_setup.c
- * @brief Setup cellular connectivity for board with cellular module.
+ * @file cellular_setup_qgsm.c
+ * @brief Setup cellular connectivity for Quectel GSM Modules.
  */
 
 /* FreeRTOS include. */
@@ -72,6 +72,11 @@ uint8_t CellularSocketPdnContextId = CELLULAR_PDN_CONTEXT_ID;
 
 /*-----------------------------------------------------------*/
 
+/*Quectel GSM Modules require starting the TCPIP task*/
+extern CellularError_t Cellular_StartTCPIP(CellularContext_t* pContext);
+
+/*-----------------------------------------------------------*/
+
 bool setupCellular( void )
 {
     bool cellularRet = true;
@@ -81,13 +86,9 @@ bool setupCellular( void )
     CellularCommInterface_t * pCommIntf = &CellularCommInterface;
     uint8_t tries = 0;
     CellularPdnConfig_t pdnConfig = { CELLULAR_PDN_CONTEXT_IPV4, CELLULAR_PDN_AUTH_NONE, CELLULAR_APN, "", "" };
-    CellularPdnStatus_t PdnStatusBuffers[ CELLULAR_PDN_CONTEXT_NUM ] = { 0 };
     char localIP[ CELLULAR_IP_ADDRESS_MAX_SIZE ] = { '\0' };
     uint32_t timeoutCountLimit = ( CELLULAR_PDN_CONNECT_TIMEOUT / CELLULAR_PDN_CONNECT_WAIT_INTERVAL_MS ) + 1U;
     uint32_t timeoutCount = 0;
-    uint8_t NumStatus = 0;
-    bool pdnStatus = false;
-    uint32_t i = 0U;
 
     /* Initialize Cellular Comm Interface. */
     cellularStatus = Cellular_Init( &CellularHandle, pCommIntf );
@@ -191,6 +192,16 @@ bool setupCellular( void )
 
     if( cellularStatus == CELLULAR_SUCCESS )
     {
+        cellularStatus = Cellular_StartTCPIP( CellularHandle );
+
+        if( cellularStatus != CELLULAR_SUCCESS )
+        {
+            configPRINTF( ( ">>>  Cellular_StartTCPIP failure %d  <<<\r\n", cellularStatus ) );
+        }
+    }
+
+    if( cellularStatus == CELLULAR_SUCCESS )
+    {
         cellularStatus = Cellular_ActivatePdn( CellularHandle, CellularSocketPdnContextId );
 
         if( cellularStatus != CELLULAR_SUCCESS )
@@ -209,34 +220,7 @@ bool setupCellular( void )
         }
     }
 
-    if( cellularStatus == CELLULAR_SUCCESS )
-    {
-        cellularStatus = Cellular_GetPdnStatus( CellularHandle, PdnStatusBuffers, CELLULAR_PDN_CONTEXT_NUM, &NumStatus );
-
-        if( cellularStatus != CELLULAR_SUCCESS )
-        {
-            configPRINTF( ( ">>>  Cellular_GetPdnStatus failure %d  <<<\r\n", cellularStatus ) );
-        }
-    }
-
-    if( cellularStatus == CELLULAR_SUCCESS )
-    {
-        for( i = 0U; i < NumStatus; i++ )
-        {
-            if( ( PdnStatusBuffers[ i ].contextId == CellularSocketPdnContextId ) && ( PdnStatusBuffers[ i ].state == 1 ) )
-            {
-                pdnStatus = true;
-                break;
-            }
-        }
-
-        if( pdnStatus == false )
-        {
-            configPRINTF( ( ">>>  Cellular PDN is not activated <<<" ) );
-        }
-    }
-
-    if( ( cellularStatus == CELLULAR_SUCCESS ) && ( pdnStatus == true ) )
+    if (cellularStatus == CELLULAR_SUCCESS)
     {
         configPRINTF( ( ">>>  Cellular module registered, IP address %s  <<<\r\n", localIP ) );
         cellularRet = true;
