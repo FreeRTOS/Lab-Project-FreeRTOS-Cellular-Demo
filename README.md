@@ -81,9 +81,10 @@ The demo project files for Visual Studio are named *xyz*_mqtt_mutual_auth_demo.s
 
 * [projects/sim70x0_mqtt_mutual_auth_demo](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/tree/master/projects/sim70x0_mqtt_mutual_auth_demo)
 
-There is also a demo for 1nce zero touch provisioning with BG96 modem:
+There is also a demo for 1nce zero touch provisioning with Quectel BG96 & GSM Modules (Tested with M95 & M66) :
 
 * [projects/1nce_bg96_zero_touch_provisioning_demo](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/tree/master/projects/1nce_bg96_zero_touch_provisioning_demo)
+* [projects/1nce_qgsm_zero_touch_provisioning_demo](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/tree/master/projects/1nce_qgsm_zero_touch_provisioning_demo)
 
 ```
 ./Lab-Project-FreeRTOS-Cellular-Demo
@@ -97,6 +98,7 @@ There is also a demo for 1nce zero touch provisioning with BG96 modem:
 ├── projects
 │   ├──  sim70x0_mqtt_mutual_auth_demo ( demo project for SIMCOM sim7080/sim7090 )
 │   └──  1nce_bg96_zero_touch_provisioning_demo ( demo project for 1nce zero touch provisioning with BG96 )
+│   └──  1nce_qgsm_zero_touch_provisioning_demo ( demo project for 1nce zero touch provisioning with Quectel GSM Modules )
 └── source
     ├── cellular
     │   └── ( code for adapting FreeRTOS Cellular Library with this demo )
@@ -204,7 +206,7 @@ Incoming Publish Message : Hello World!
 
 ## Build and run the 1nce zero-touch-provisioning demo
 
-1NCE is a global IoT Carrier specialized in providing managed connectivity services for low bandwidth IoT applications. In this demo, 1NCE service(a 1NCE sim card + AWS IoT device onboarding server) and BG96 cellular module are used to demonstrate how to provision device with zero-touch and connect to AWS IoT core. Refer to the [1nce blueprint for FreeRTOS](https://github.com/1NCE-GmbH/blueprint-freertos), in particular, [this flow chart](https://1nce.com/wp-content/uploads/2020/07/Identity2.png), to learn how the zero-touch-provisioning works. 
+1NCE is a global IoT Carrier specialized in providing managed connectivity services for low bandwidth IoT applications. In this demo, 1NCE service(a 1NCE sim card + AWS IoT device onboarding server) and supported cellular modules are used to demonstrate how to provision device with zero-touch and connect to AWS IoT core. Refer to the [1nce blueprint for FreeRTOS](https://github.com/1NCE-GmbH/blueprint-freertos), in particular, [this flow chart](https://1nce.com/wp-content/uploads/2020/07/Identity2.png), to learn how the zero-touch-provisioning works. 
 
 1. In Visual Studio, open the 1nce_bg96_zero_touch_provisioning_demo.sln project.  In this Visual Studio solution file, the macro of `USE_1NCE_ZERO_TOUCH_PROVISIONING` is defined. Please look for `#ifdef USE_1NCE_ZERO_TOUCH_PROVISIONING` in the source files to see how it does differently to provision the device by using the 1nce service.  Otherwise, this demo performs the same mutually authenticated MQTT operations as the other demos.
 2. [Generate a self-signed certificate and its private key locally.](https://docs.aws.amazon.com/iot/latest/developerguide/create-device-cert.html) Update “[source/demo_config.h](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/blob/main/source/demo_config.h)” with the certificate and private key. These are for the purpose of establishing TLS connection to 1nce server.  Note that adding keys into a header file is done for convenience of demonstration only.  Production devices should use secure storage to store the keys.
