@@ -40,9 +40,6 @@
     <Filter Include="source\coreMQTT">
       <UniqueIdentifier>{93d228e3-e7d3-48e4-8ab9-6773eab0a2b3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="source\FreeRTOS">
-      <UniqueIdentifier>{17607364-814f-404c-ae9e-7832ed604bf0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="source\cellular">
       <UniqueIdentifier>{7006a8e9-3bd5-4473-944e-bcb717192bf8}</UniqueIdentifier>
     </Filter>
@@ -88,6 +85,12 @@
     <Filter Include="lib\cellular\modules\ThirdParty\Community-Supported-Ports\sim70x0">
       <UniqueIdentifier>{15c7f3eb-ef5a-4634-8630-e5a551850834}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\logging">
+      <UniqueIdentifier>{f999dabf-520d-4393-b8b9-666ca1995580}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="config">
+      <UniqueIdentifier>{2db5ef4a-ca90-40bd-a8e4-f897b48c05b7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\lib\coreMQTT\source\include\core_mqtt_config_defaults.h">
@@ -132,26 +135,11 @@
     <ClInclude Include="..\..\lib\coreMQTT\source\portable\transport_interface.h">
       <Filter>lib\coreMQTT\src\portable</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\demo_config.h">
-      <Filter>source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\logging_levels.h">
-      <Filter>source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\logging_stack.h">
-      <Filter>source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\mbedtls\mbedtls_config.h">
-      <Filter>source\mbedtls</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\source\mbedtls\mbedtls_error.h">
       <Filter>source\mbedtls</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\mbedtls\threading_alt.h">
       <Filter>source\mbedtls</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\coreMQTT\core_mqtt_config.h">
-      <Filter>source\coreMQTT</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\coreMQTT\sockets_wrapper.h">
       <Filter>source\coreMQTT</Filter>
@@ -159,13 +147,7 @@
     <ClInclude Include="..\..\source\coreMQTT\using_mbedtls.h">
       <Filter>source\coreMQTT</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\FreeRTOS\FreeRTOSConfig.h">
-      <Filter>source\FreeRTOS</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\source\cellular\cellular_platform.h">
-      <Filter>source\cellular</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\cellular\sim70x0\cellular_config.h">
       <Filter>source\cellular</Filter>
     </ClInclude>
     <ClInclude Include="..\..\lib\backoff_algorithm\source\include\backoff_algorithm.h">
@@ -525,6 +507,27 @@
     <ClInclude Include="..\..\lib\ThirdParty\mbedtls\library\ssl_tls13_keys.h">
       <Filter>lib\ThirdParty\mbedtls\include</Filter>
     </ClInclude>
+    <ClInclude Include="cellular_config.h">
+      <Filter>config</Filter>
+    </ClInclude>
+    <ClInclude Include="core_mqtt_config.h">
+      <Filter>config</Filter>
+    </ClInclude>
+    <ClInclude Include="demo_config.h">
+      <Filter>config</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeRTOSConfig.h">
+      <Filter>config</Filter>
+    </ClInclude>
+    <ClInclude Include="mbedtls_config.h">
+      <Filter>config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\logging\logging_levels.h">
+      <Filter>source\logging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\logging\logging_stack.h">
+      <Filter>source\logging</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\lib\coreMQTT\source\core_mqtt_serializer.c">
@@ -561,12 +564,6 @@
       <Filter>lib\FreeRTOS\portable</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\cellular_setup.c">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\main.c">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\MutualAuthMQTTExample.c">
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\mbedtls\mbedtls_error.c">
@@ -911,5 +908,7 @@
     <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\ssl_tls13_keys.c">
       <Filter>lib\ThirdParty\mbedtls\library</Filter>
     </ClCompile>
+    <ClCompile Include="main.c" />
+    <ClCompile Include="DemoTasks\MutualAuthMQTTExample.c" />
   </ItemGroup>
 </Project>
