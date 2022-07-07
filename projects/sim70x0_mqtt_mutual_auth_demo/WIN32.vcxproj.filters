@@ -908,7 +908,10 @@
     <ClCompile Include="..\..\lib\ThirdParty\mbedtls\library\ssl_tls13_keys.c">
       <Filter>lib\ThirdParty\mbedtls\library</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="main.c" />
     <ClCompile Include="DemoTasks\MutualAuthMQTTExample.c" />
+=======
+>>>>>>> freertos/main
   </ItemGroup>
 </Project>

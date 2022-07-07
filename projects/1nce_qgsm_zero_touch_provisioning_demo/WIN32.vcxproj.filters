@@ -538,6 +538,63 @@
     <ClInclude Include="mbedtls_config.h">
       <Filter>config</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\config_psa.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\include\mbedtls\constant_time.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\library\check_crypto_config.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\library\constant_time_internal.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\library\constant_time_invasive.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\library\ecp_invasive.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\library\mps_common.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\library\mps_error.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\library\mps_reader.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\library\mps_trace.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\library\psa_crypto_aead.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\library\psa_crypto_cipher.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\library\psa_crypto_driver_wrappers.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\library\psa_crypto_ecp.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\library\psa_crypto_hash.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\library\psa_crypto_mac.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\library\psa_crypto_random_impl.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\library\psa_crypto_rsa.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\ThirdParty\mbedtls\library\ssl_tls13_keys.h">
+      <Filter>lib\ThirdParty\mbedtls\include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\lib\coreMQTT\source\core_mqtt_serializer.c">
