@@ -95,7 +95,7 @@
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="lib/FreeRTOS/portable/GCC/ARM_CM4F"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="lib/ThirdParty/mbedtls/library"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="lib/backoff_algorithm/source"/>
-						<entry excluding="cellular_bg96.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="lib/cellular/modules/bg96"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="lib/cellular/modules/bg96"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="lib/cellular/source"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="lib/coreMQTT/source"/>
 						<entry excluding="comm_if_windows.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="source/cellular"/>
@@ -180,7 +180,7 @@
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="lib/FreeRTOS/portable/GCC/ARM_CM4F"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="lib/ThirdParty/mbedtls/library"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="lib/backoff_algorithm/source"/>
-						<entry excluding="cellular_bg96.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="lib/cellular/modules/bg96"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="lib/cellular/modules/bg96"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="lib/cellular/source"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="lib/coreMQTT/source"/>
 						<entry excluding="comm_if_windows.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="source/cellular"/>

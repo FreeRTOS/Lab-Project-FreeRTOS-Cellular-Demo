@@ -2,9 +2,16 @@
 
 This document describes how to integrate the cellular library to run MQTT mutual authentication demo on STM32 platform.
 The demo is constructed incrementally. Checkpoints are provided in the each step to help verifing the integration result.
-All the sofware components only required are included in this repository.
-The demo repository seperates the code into library ( lib folder ) and library adapting software ( source folder ).
+
+
+All of the only required sofware components are included in this repository. The demo repository seperates the code into the following categorires:
+* library ( lib folder )
+* library adapting software ( source folder )
+
 The purpose of doing this is to help user integrate these libraries into their existing code base.
+Library adapting software provides example implementation and may be modified to adapt to different platform.
+
+# Incremental build steps and checkpoints
 
 <p align="center"><img src="../../doc/cellular_component_and_interface.png" width="70%"><br>
 Components and Interfaces</p>
@@ -23,7 +30,7 @@ Starting from the button of the software stack. The demo is built incrementally 
 6. **Integrate the coreMQTT and mutual authenticated demo**
     * Checkpoint : Run the demo code without problem
 
-If you encounter problems at checkpoint during the integration process, it is recommended to stop and troubleshoot the problem.
+If you encounter problems at checkpoint for integration step, it is recommended that you troubleshoot the problem before proceeding to the next step.
 
 # Software and hardware requiremnt and environment setup
 
@@ -64,7 +71,7 @@ NVIC
         * Time base: System tick timer
 
 > Caution : Priority Group bits must be set to 4-bits due to the following reason
-> 1. SVC must be call with interrupt enabled. 0-bit can't be used.
+> 1. SVC must be call with its interrupt enabled. 0-bit can't be used.
 > 2. Comm interface use USART1. USART1 interrupt handler calls FreeRTOS APIs. USART1 interrupt priority must lower than configMAX_SYSCALL_INTERRUPT_PRIORITY priority ( in this demo is 5 )
 
 USART1
@@ -160,7 +167,7 @@ static void CellularDemoTask( void * pvParameters )
 ```
 
 ### Note for STM32 CubeIDE
-This section is provided to help using the STM32 CubeIDE. Only the FreeRTOS/Source are described.
+This section is provided to add existing source files with STM32 CubeIDE. Only the FreeRTOS/Source are described.
 You can do the same for other source files.
 
 1. Drag the Lab-FreeRTOS-Cellular-Demo/lib folder to your project
