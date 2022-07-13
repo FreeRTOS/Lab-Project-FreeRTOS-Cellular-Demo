@@ -1,21 +1,32 @@
-# FreeRTOS Labs - FreeRTOS Cellular Library Demo
+# FreeRTOS Labs - FreeRTOS Cellular Interface Demo
 
 ## Introduction
 
-FreeRTOS offers a suite of networking stacks designed for IoT applications.  Applications can access communication protocols at different levels - MQTT, HTTP, Secure Sockets, etc.  Common connectivity technologies such as Ethernet, Wi-Fi and BLE have been integrated with the networking stacks of FreeRTOS, with [a wide selection of microcontrollers and modules](https://devices.amazonaws.com/search?page=1&sv=freertos) pre-integrated.
+FreeRTOS offers a suite of networking stacks designed for IoT applications.
+Applications can access communication protocols at different levels - MQTT, HTTP,
+Secure Sockets, etc.  Common connectivity technologies such as Ethernet, Wi-Fi and
+BLE have been integrated with the networking stacks of FreeRTOS, with 
+[a wide selection of microcontrollers and modules](https://devices.amazonaws.com/search?page=1&sv=freertos)
+pre-integrated.
 
-The demos in this project demonstrate how to establish mutually authenticated MQTT connections to MQTT brokers, such as AWS IoT Core, by using cellular connectivity.  The demos use the [Cellular Library](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Library/raw/main/doc/document/cellular.zip) sub-moduled from an external project. The FreeRTOS Cellular Library exposes the capability of a few popular cellular modems through a uniform API.
+FreeRTOS supported demos for FreeRTOS cellular interface can be found in the [FreeRTOS repository](https://github.com/FreeRTOS/FreeRTOS/tree/main/FreeRTOS-Plus/Demo/FreeRTOS_Cellular_Interface_Windows_Simulator).
+This repository contains community supported demos. The demos in this project
+demonstrate how to establish mutually authenticated MQTT connections to MQTT brokers,
+such as AWS IoT Core, by using cellular connectivity. The demos use the 
+[FreeRTOS Cellular Interface](https://github.com/FreeRTOS/FreeRTOS-Cellular-Interface)
+sub-moduled from an external project. The FreeRTOS Cellular Interface exposes the
+capability of a few popular cellular modems through a uniform API.
 
 1. [1nce Zero Touch Provisioning](https://1nce.com/en/help-center/tutorials-documentations/1nce-connectivity-suite/)
 1. [SIMCOM SIM7080](https://cn.simcom.com/product/SIM7080G.html)
 
-The MQTT and HTTP libraries of FreeRTOS use an abstract [Transport Interface](https://github.com/FreeRTOS/coreMQTT/blob/main/source/interface/transport_interface.h) to send/receive data in a generic way.  The demos in this project offer a [implementation](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/blob/master/source/coreMQTT/using_mbedtls.c) of the Transport Interface on top of the uniform API exposed by the FreeRTOS Cellular Library.
+The MQTT and HTTP libraries of FreeRTOS use an abstract [Transport Interface](https://github.com/FreeRTOS/coreMQTT/blob/main/source/interface/transport_interface.h) to send/receive data in a generic way.  The demos in this project offer a [implementation](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/blob/master/source/coreMQTT/using_mbedtls.c) of the Transport Interface on top of the uniform API exposed by the FreeRTOS Cellular Interface.
 
 ## Hardware Setup
 
 The demos in this project can be run in the [FreeRTOS Windows Simulator](https://freertos.org/FreeRTOS-Windows-Simulator-Emulator-for-Visual-Studio-and-Eclipse-MingW.html).  You will need a Windows PC and one of the supported cellular modems to run a demo.  A version of Visual Studio, such as the free Community version of [Visual Studios](https://visualstudio.microsoft.com/vs/community/), will be needed for building the demos.
 
-FreeRTOS Windows simulator make use of COM port to communicate with cellular module. Setup you cellular module communication with the following steps.
+FreeRTOS Windows simulator make use of COM port to communicate with cellular module. Setup your cellular module communication with the following steps.
 
 1. Connect the cellular module to PC.  Most cellular dev kits have USB, in that case, just connect it to PC’s USB port and look for the COM port in Window’s Device Manager.  For example, you will see a new COM69 showing up when you connect the modem like below.  If your cellular dev kit does not have USB, use a USB adaptor [like these](https://www.amazon.com/Serial-Usb-Adapter/s?k=Serial+To+Usb+Adapter). 
 
@@ -43,14 +54,14 @@ Figure 1. Components and Interfaces</p>
 
 The other components shown as blue boxes and dotted lines are implemented by this project:
 
-* The [Demo Application](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/blob/main/source).  It is largely the same as the [coreMQTT demo](https://github.com/FreeRTOS/FreeRTOS/tree/master/FreeRTOS-Plus/Demo/coreMQTT_Windows_Simulator/MQTT_Mutual_Auth), with added logic to set up cellular as the transport.  (The original coreMQTT demo was designed for Wi-Fi on FreeRTOS Windows Simulator.)  There is also a demo application that integrates [1nce Zero Touch Provisioning](https://1nce.com/en/help-center/tutorials-documentations/1nce-connectivity-suite/) with the FreeRTOS Cellular Library and coreMQTT for connecting to AWS IoT Core.
+* The [Demo Application](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/blob/main/source).  It is largely the same as the [coreMQTT demo](https://github.com/FreeRTOS/FreeRTOS/tree/master/FreeRTOS-Plus/Demo/coreMQTT_Windows_Simulator/MQTT_Mutual_Auth), with added logic to set up cellular as the transport.  (The original coreMQTT demo was designed for Wi-Fi on FreeRTOS Windows Simulator.)  There is also a demo application that integrates [1nce Zero Touch Provisioning](https://1nce.com/en/help-center/tutorials-documentations/1nce-connectivity-suite/) with the FreeRTOS Cellular Interface and coreMQTT for connecting to AWS IoT Core.
 * The [Transport Interface](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/blob/main/source/coreMQTT/using_mbedtls.c) is needed by the MQTT library (sub-moduled from the [coreMQTT](https://github.com/freertos/coreMQTT) project) to send and receive packets.
 * The[TLS porting interface](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/blob/main/source/mbedtls/mbedtls_freertos_port.c) is needed by the mbedTLS library to run on FreeRTOS.
-* The [Comm Interface](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/blob/main/source/cellular/comm_if_windows.c) is used by the FreeRTOS Cellular Library to communicate with the cellular modems over UART connections.
+* The [Comm Interface](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/blob/main/source/cellular/comm_if_windows.c) is used by the FreeRTOS Cellular Interface to communicate with the cellular modems over UART connections.
 
 ## Developer References and API Documents
 
-Please refer to [FreeRTOS Cellular Library API document](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Library/raw/main/doc/document/cellular.zip).
+Please refer to [FreeRTOS Cellular Interface API document](https://www.freertos.org/Documentation/api-ref/cellular/index.html).
 
 
 ## Download the source code
@@ -90,32 +101,29 @@ There is also a demo for 1nce zero touch provisioning with Quectel BG96 & GSM Mo
 ./Lab-Project-FreeRTOS-Cellular-Demo
 ├── lib
 │   ├── backoff_algorithm ( submodule : backoffAlgorithm )
-│   ├── cellular ( submodule : Lab-Project-FreeRTOS-Cellular-Library )
+│   ├── cellular ( submodule : FreeRTOS-Cellular-Interface )
 │   ├── coreMQTT ( submodule : coreMQTT )
 │   ├── FreeRTOS ( submodule : FreeRTOS-Kernel )
 │   └── ThirdParty
 │       └── mbedtls ( submodule : mbedtls )
 ├── projects
 │   ├──  sim70x0_mqtt_mutual_auth_demo ( demo project for SIMCOM sim7080/sim7090 )
-│   └──  1nce_bg96_zero_touch_provisioning_demo ( demo project for 1nce zero touch provisioning with BG96 )
+│   │    └── ( project dependent demo tasks and configuration files )
+│   ├──  1nce_bg96_zero_touch_provisioning_demo ( demo project for 1nce zero touch provisioning with BG96 )
+│   │    └── ( project dependent demo tasks and configuration files )
 │   └──  1nce_qgsm_zero_touch_provisioning_demo ( demo project for 1nce zero touch provisioning with Quectel GSM Modules )
-└── source
+│   │    └── ( project dependent demo tasks and configuration files )
+└── source ( common source files to adapt libraries )
     ├── cellular
-    │   └── ( code for adapting FreeRTOS Cellular Library with this demo )
+    │   └── ( code for adapting FreeRTOS Cellular Interface with this demo )
     ├── coreMQTT
     │   └── ( code for adapting coreMQTT with this demo )
-    ├── FreeRTOS
-    │   └── ( code for adapting FreeRTOS with this demo )
     ├── mbedtls
     │   └── ( code for adapting mbedtls with this demo )
-    ├── main.c
-    ├── cellular_setup.c
-    ├── MutualAuthMQTTExample.c
-    ├── demo_config.h
-    ├── logging_levels.h
-    ├── logging_stack.h
-    ├── 1nce_zero_touch_provisioning.h
-    └── 1nce_zero_touch_provisioning.c
+    ├── Logging
+    │   └── ( code for FreeRTOS logging )
+    └── cellular_setup.c
+
 ```
 
 
@@ -124,7 +132,9 @@ There is also a demo for 1nce zero touch provisioning with Quectel BG96 & GSM Mo
 
 ### **Configure cellular network**
 
-The following parameters in the cellular configuration, [cellular_config.h](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/tree/main/source/cellular), (located in "source/cellular/<cellular_module>/cellular_config.h”) must be modified for your network environment.
+The following parameters in the cellular configuration,
+[cellular_config.h](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/tree/main/source/cellular),
+(located in <b>"projects/\<project_name\>/cellular_config.h”</b>) must be modified for your network environment.
 
 | Configuration   |      Description      |  Value |
 |-----------------|-----------------------|--------|
@@ -137,7 +147,7 @@ The following parameters in the cellular configuration, [cellular_config.h](http
 
 ### **Configure MQTT broker**
 
-The configuration for connecting to a MQTT broker can be found in “[source/demo_config.h](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/blob/main/source/demo_config.h)”. Refer to the [documentation](https://www.freertos.org/mqtt/mutual-authentication-mqtt-example.html#configuration) for more information about the settings.
+The configuration for connecting to a MQTT broker can be found in <b>"projects/\<project_name\>/demo_config.h"</b> for more information about the settings.
 
 ### Configure COM port settings
 
@@ -145,7 +155,8 @@ Reference the cellular module documentation for COM port settings. Update the [c
 
 ### **Configure other sub-modules**
 
-[“source/FreeRTOS/FreeRTOSConfig.h](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/blob/main/source/FreeRTOS/FreeRTOSConfig.h)”, “[source/mbedtls/mbedtls_config.h](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/blob/master/source/mbedtls/mbedtls_config.h)” and “[source/coreMQTT/core_mqtt_config.h](https://github.com/FreeRTOS/Lab-Project-FreeRTOS-Cellular-Demo/blob/main/source/coreMQTT/core_mqtt_config.h)” are configurations for the corresponding sub-modules. 
+<b>"projects/\<project_name\>/FreeRTOSConfig.h"</b>, <b>"projects/\<project_name\>/mbedtls_config.h"</b> and <b>"projects/\<project_name\>/core_mqtt_config.h"</b>, 
+are configurations for the corresponding sub-modules. 
 
 ## Demo Execution Step flow
 
