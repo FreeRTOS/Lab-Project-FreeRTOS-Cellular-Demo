@@ -60,11 +60,6 @@
 /* Transport interface implementation include header for TLS. */
 #include "using_mbedtls.h"
 
-/* Use 1NCE service to onboard device. */
-#ifdef USE_1NCE_ZERO_TOUCH_PROVISIONING
-    #include "1nce_zero_touch_provisioning.h"
-#endif
-
 /*-----------------------------------------------------------*/
 
 /* Compile time error for undefined configs. */
@@ -485,19 +480,9 @@ void RunMQTTTask( void * pvParameters )
      */
     ulGlobalEntryTimeMs = prvGetTimeMs();
 
-    #ifdef USE_1NCE_ZERO_TOUCH_PROVISIONING
-        uint8_t status = nce_onboard( &pThingName,
-                                      &pEndpoint,
-                                      &pExampleTopic,
-                                      &pRootCA,
-                                      &pClientCert,
-                                      &pPrvKey );
-        configASSERT( status == EXIT_SUCCESS );
-    #else
-        pThingName = democonfigCLIENT_IDENTIFIER;
-        pEndpoint = democonfigMQTT_BROKER_ENDPOINT;
-        pExampleTopic = mqttexampleTOPIC;
-    #endif /* ifdef USE_1NCE_ZERO_TOUCH_PROVISIONING */
+    pThingName = democonfigCLIENT_IDENTIFIER;
+    pEndpoint = democonfigMQTT_BROKER_ENDPOINT;
+    pExampleTopic = mqttexampleTOPIC;
 
     for( ulTopicCount = 0; ulTopicCount < mqttexampleTOPIC_COUNT; ulTopicCount++ )
     {
@@ -615,25 +600,14 @@ static TlsTransportStatus_t prvConnectToServerWithBackoffRetries( NetworkCredent
 
     pxNetworkCredentials->disableSni = democonfigDISABLE_SNI;
     /* Set the credentials for establishing a TLS connection. */
-    #ifdef USE_1NCE_ZERO_TOUCH_PROVISIONING
-        pxNetworkCredentials->pRootCa = ( uint8_t * ) pRootCA;
-        pxNetworkCredentials->rootCaSize = strlen( pRootCA ) + 1;
-        #ifdef democonfigCLIENT_CERTIFICATE_PEM
-            pxNetworkCredentials->pClientCert = ( uint8_t * ) pClientCert;
-            pxNetworkCredentials->clientCertSize = strlen( pClientCert ) + 1;
-            pxNetworkCredentials->pPrivateKey = ( uint8_t * ) pPrvKey;
-            pxNetworkCredentials->privateKeySize = strlen( pPrvKey ) + 1;
-        #endif /* #ifdef democonfigCLIENT_CERTIFICATE_PEM */
-    #else /* #ifdef USE_1NCE_ZERO_TOUCH_PROVISIONING */
-        pxNetworkCredentials->pRootCa = ( const unsigned char * ) democonfigROOT_CA_PEM;
-        pxNetworkCredentials->rootCaSize = sizeof( democonfigROOT_CA_PEM );
-        #ifdef democonfigCLIENT_CERTIFICATE_PEM
-            pxNetworkCredentials->pClientCert = ( const unsigned char * ) democonfigCLIENT_CERTIFICATE_PEM;
-            pxNetworkCredentials->clientCertSize = sizeof( democonfigCLIENT_CERTIFICATE_PEM );
-            pxNetworkCredentials->pPrivateKey = ( const unsigned char * ) democonfigCLIENT_PRIVATE_KEY_PEM;
-            pxNetworkCredentials->privateKeySize = sizeof( democonfigCLIENT_PRIVATE_KEY_PEM );
-        #endif /* #ifdef democonfigCLIENT_CERTIFICATE_PEM */
-    #endif /* #ifdef USE_1NCE_ZERO_TOUCH_PROVISIONING */
+    pxNetworkCredentials->pRootCa = ( const unsigned char * ) democonfigROOT_CA_PEM;
+    pxNetworkCredentials->rootCaSize = sizeof( democonfigROOT_CA_PEM );
+    #ifdef democonfigCLIENT_CERTIFICATE_PEM
+        pxNetworkCredentials->pClientCert = ( const unsigned char * ) democonfigCLIENT_CERTIFICATE_PEM;
+        pxNetworkCredentials->clientCertSize = sizeof( democonfigCLIENT_CERTIFICATE_PEM );
+        pxNetworkCredentials->pPrivateKey = ( const unsigned char * ) democonfigCLIENT_PRIVATE_KEY_PEM;
+        pxNetworkCredentials->privateKeySize = sizeof( democonfigCLIENT_PRIVATE_KEY_PEM );
+    #endif /* #ifdef democonfigCLIENT_CERTIFICATE_PEM */
 
     /* Initialize reconnect attempts and interval. */
     BackoffAlgorithm_InitializeParams( &xReconnectParams,

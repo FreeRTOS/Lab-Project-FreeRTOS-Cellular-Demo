@@ -92,6 +92,10 @@
  */
 #define CELLULAR_IP_ADDRESS_MAX_SIZE    ( 64U )
 
+/*
+ * CTS/RTS pins on F411RET Nucleo 64 is not connected to STMODA1 board. Disable
+ * flow control with the cellular modem.
+ */
 #define CELLULAR_CONFIG_DISABLE_FLOW_CONTROL
 
 #endif /* __CELLULAR_CONFIG_H__ */
