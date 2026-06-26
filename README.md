@@ -1,3 +1,5 @@
+> ⚠️ **Disclaimer:** This repository is a FreeRTOS Labs reference project, provided for demonstration and evaluation purposes only, and should not be used in production.
+
 # FreeRTOS Labs - FreeRTOS Cellular Interface Demo
 
 ## Introduction
